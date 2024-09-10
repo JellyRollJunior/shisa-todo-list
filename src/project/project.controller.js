@@ -113,9 +113,11 @@ const ProjectController = (function () {
                 "2024-09-10",
                 "High"
             );
+        } else {
+            ProjectHolder.parseJson(localProjects);
+            renderContent();
         }
         renderSidebar();
-        renderContent();
     };
 
     return {

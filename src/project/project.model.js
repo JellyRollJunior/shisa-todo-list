@@ -24,6 +24,24 @@ const ProjectHolder = (function () {
         projects[projectIndex].removeSubtask(taskIndex, subtaskIndex);
     };
 
+    const parseJson = (projectJson) => {
+        const projectsData = JSON.parse(projectJson);
+        for (let i = 0; i < projectsData.length; i++) {
+            let project = projectsData[i];
+            addProject(project.title, project.description);
+            
+            for (let j = 0; j < project.tasks.length; j++) {
+                let task = project.tasks[j];
+                addTask(i, task.title, task.description, task.dueDate, task.priority);
+
+                for (let k = 0; k < task.subtasks.length; k++) {
+                    let subtask = task.subtasks[k];
+                    addSubtask(i, j, subtask.title);
+                }
+            }
+        }
+    }
+
     return {
         projects,
         getProjects,
@@ -33,6 +51,7 @@ const ProjectHolder = (function () {
         removeTask,
         addSubtask,
         removeSubtask,
+        parseJson,
     };
 })();
 
