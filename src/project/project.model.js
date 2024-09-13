@@ -1,4 +1,17 @@
-export { createProject, createTask };
+export { ProjectHolder, createProject, createTask };
+
+const ProjectHolder = (function () {
+    const projects = [];
+
+    const getProjects = () => projects;
+
+    const addProject = (title, description) => {
+        projects.push(createProject(title, description));
+    };
+    const removeProject = (index) => projects.splice(index, 1);
+
+    return { getProjects, addProject, removeProject };
+})();
 
 function createProject(title, description) {
     const tasks = [];

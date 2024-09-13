@@ -1,29 +1,30 @@
-import { createProject } from "./project.model.js";
+import { ProjectHolder } from "./project.model.js";
 
 export { ProjectController };
 
 const ProjectController = (function () {
-    const projects = [];
 
-    const getProjects = () => projects;
+    const getProjects = () => {
+        ProjectHolder.getProjects();
+    }
 
     const addProject = (title, description) => {
-        projects.push(createProject(title, description));
+        ProjectHolder.addProject(title, description);
     };
-    const removeProject = (index) => projects.splice(index, 1);
+    const removeProject = (index) => ProjectHolder.removeProject(index);
 
     const addTask = (projectIndex, title, description, dueDate, priority) => {
-        projects[projectIndex].addTask(title, description, dueDate, priority);
+        ProjectHolder.getProjects()[projectIndex].addTask(title, description, dueDate, priority);
     };
     const removeTask = (projectIndex, taskIndex) => {
-        projects[projectIndex].removeTask(taskIndex);
+        ProjectHolder.getProjects[projectIndex].removeTask(taskIndex);
     };
 
     const addSubTask = (projectIndex, taskIndex, description) => {
-        projects[projectIndex].getTasks()[taskIndex].addSubtask(description);
+        ProjectHolder.getProjects[projectIndex].getTasks()[taskIndex].addSubtask(description);
     };
     const removeSubtask = (projectIndex, taskIndex, subtaskIndex) => {
-        projects[projectIndex].getTasks()[taskIndex].removeSubtask(subtaskIndex);
+        ProjectHolder.getProjects[projectIndex].getTasks()[taskIndex].removeSubtask(subtaskIndex);
     };
 
     return {
