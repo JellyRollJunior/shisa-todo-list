@@ -22,6 +22,18 @@ body {
   border: 2px solid black;
 }
 
+header {
+  display: flex;
+}
+
+.user-icon {
+  --icon-size: 50px;
+
+  height: var(--icon-size);
+  width: var(--icon-size);
+  border-radius: 50%;
+}
+
 .content {
   border: 2px solid black;
 }
