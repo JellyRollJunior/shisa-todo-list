@@ -17,8 +17,8 @@ const ProjectHolder = (function () {
         projects[projectIndex].removeTask(taskIndex);
     };
 
-    const addSubTask = (projectIndex, taskIndex, description) => {
-        projects[projectIndex].addSubTask(taskIndex, description);
+    const addSubtask = (projectIndex, taskIndex, description) => {
+        projects[projectIndex].addSubtask(taskIndex, description);
     };
     const removeSubtask = (projectIndex, taskIndex, subtaskIndex) => {
         projects[projectIndex].removeSubtask(taskIndex, subtaskIndex);
@@ -30,7 +30,7 @@ const ProjectHolder = (function () {
         removeProject,
         addTask,
         removeTask,
-        addSubTask,
+        addSubtask,
         removeSubtask,
     };
 })();

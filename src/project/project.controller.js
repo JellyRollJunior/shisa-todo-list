@@ -1,8 +1,14 @@
 import { ProjectHolder } from "./project.model.js";
+import { View } from "./project.view.js";
 
 export { ProjectController };
 
 const ProjectController = (function () {
+
+    const displayProjects = () => {
+        View.displayProjects(ProjectHolder.getProjects());
+    }
+
     const addProject = (title, description) => {
         ProjectHolder.addProject(title, description);
     }
@@ -18,7 +24,7 @@ const ProjectController = (function () {
     };
 
     const addSubTask = (projectIndex, taskIndex, description) => {
-        ProjectHolder.addSubTask(projectIndex, taskIndex, description);
+        ProjectHolder.addSubtask(projectIndex, taskIndex, description);
     };
     const removeSubtask = (projectIndex, taskIndex, subtaskIndex) => {
         ProjectHolder.removeSubtask(projectIndex, taskIndex, subtaskIndex);
@@ -31,5 +37,6 @@ const ProjectController = (function () {
         removeTask,
         addSubTask,
         removeSubtask,
+        displayProjects,
     };
 })();
