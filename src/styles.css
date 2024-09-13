@@ -3,6 +3,7 @@
 *::after {
   margin: 0;
   box-sizing: border-box;
+  font-size: 16px;
 }
 
 html {
@@ -23,11 +24,13 @@ body {
 }
 
 header {
-  --user-icon-size: 50px;
+  --user-icon-size: 56px;
   --icon-button-size: 32px;
 
   display: flex;
   justify-content: space-between;
+  align-items: center;
+
   width: 100%;
   padding: 20px 12px;
 }
@@ -35,7 +38,12 @@ header {
 header > .user-info {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
+}
+
+.user-info > div {
+  font-size: 1.2rem;
+  font-weight: bold;
 }
 
 .user-icon {
