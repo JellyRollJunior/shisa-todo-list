@@ -18,6 +18,12 @@ body {
 }
 
 .sidebar {
+  --sidebar-gap: 16px;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--sidebar-gap);
+
   height: 100%;
 
   border: 2px solid black;
@@ -32,7 +38,8 @@ header {
   align-items: center;
 
   width: 100%;
-  padding: 20px 12px;
+  margin-top: calc(var(--sidebar-gap) * 1.5);
+  padding: 0px 12px;
 }
 
 header > .user-info {
@@ -55,6 +62,11 @@ header > .user-info {
 .icon-button {
   height: var(--icon-button-size);
   width: var(--icon-button-size);
+}
+
+hr {
+  width: 96%;
+  align-self: center;
 }
 
 .content {
