@@ -12,20 +12,28 @@ const ProjectHolder = (function () {
 
     const addTask = (projectIndex, title, description, dueDate, priority) => {
         projects[projectIndex].addTask(title, description, dueDate, priority);
-    }
+    };
     const removeTask = (projectIndex, taskIndex) => {
         projects[projectIndex].removeTask(taskIndex);
-    }
+    };
 
     const addSubTask = (projectIndex, taskIndex, description) => {
         projects[projectIndex].addSubTask(taskIndex, description);
-    }
+    };
     const removeSubtask = (projectIndex, taskIndex, subtaskIndex) => {
         projects[projectIndex].removeSubtask(taskIndex, subtaskIndex);
-    }
+    };
 
-    return { getProjects, addProject, removeProject, addTask, removeTask, addSubTask, removeSubtask };
-})()
+    return {
+        getProjects,
+        addProject,
+        removeProject,
+        addTask,
+        removeTask,
+        addSubTask,
+        removeSubtask,
+    };
+})();
 
 function createProject(title, description) {
     const tasks = [];
@@ -39,10 +47,10 @@ function createProject(title, description) {
 
     const addSubtask = (taskIndex, description) => {
         tasks[taskIndex].addSubtask(description);
-    }
+    };
     const removeSubtask = (taskIndex, subtaskIndex) => {
         tasks[taskIndex].removeSubtask(subtaskIndex);
-    }
+    };
 
     return {
         title,
