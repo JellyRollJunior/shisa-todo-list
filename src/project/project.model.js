@@ -1,17 +1,17 @@
-export { project, task };
+export { createProject, createTask };
 
-function project(title, description) {
+function createProject(title, description) {
     const tasks = [];
 
     const getTasks = () => tasks;
     
-    const addTask = (title, description, dueDate, priority) => tasks.push(task(title, description, dueDate, priority));
+    const addTask = (title, description, dueDate, priority) => tasks.push(createTask(title, description, dueDate, priority));
     const removeTask = (index) => tasks.splice(index, 1);
     
-    return {title, description, getTasks, addTask, removeTask};
+    return {title, description, getTasks, addTask, removeTask, addSubtask, removeSubtask};
 }
 
-function task(title, description, dueDate, priority) {
+function createTask(title, description, dueDate, priority) {
     const subtasks = [];
     
     const getSubtasks = () => subtasks;
