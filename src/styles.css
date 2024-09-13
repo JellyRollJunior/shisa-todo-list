@@ -6,6 +6,12 @@
   font-size: 16px;
 }
 
+.center-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 html {
   background-color: white;
   height: 100%;
@@ -20,7 +26,9 @@ body {
 .sidebar {
   --sidebar-background-color: white;
   --sidebar-gap: 16px;
+  --user-icon-size: 56px;
   --icon-button-size: 30px;
+  --title-icon-size: 36px;
 
   display: flex;
   flex-direction: column;
@@ -29,10 +37,6 @@ body {
   height: 100%;
 
   border: 2px solid black;
-}
-
-header {
-  --user-icon-size: 56px;
 }
 
 .sidebar-section-title {
@@ -45,26 +49,24 @@ header {
   padding: 0px 12px;
 }
 
-button {
-  background-color: var(--sidebar-background-color);
-  border: none;
-}
-
-header > .user-info {
-  display: flex;
-  align-items: center;
+.icon-title-gap {
   gap: 6px;
-}
-
-.user-info > div {
-  font-size: 1.2rem;
-  font-weight: bold;
 }
 
 .user-icon {
   height: var(--user-icon-size);
   width: var(--user-icon-size);
   border-radius: 50%;
+}
+
+.username {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+button {
+  background-color: var(--sidebar-background-color);
+  border: none;
 }
 
 img.icon-button {
@@ -77,30 +79,16 @@ hr {
   align-self: center;
 }
 
-.projects-title > div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 6px;
+.projects-section-title > img {
+  height: var(--title-icon-size);
+  width: var(--title-icon-size);
 }
 
-.projects-title > div > img {
-  --icon-size: 36px;
-  height: var(--icon-size);
-  width: var(--icon-size);
-}
-
-.projects-title h2 {
+.projects-section-title > h2 {
   font-size: 1.4rem;
 }
 
-.projects-title > button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.projects-title > button > img {
+.add-project > img {
   border-radius: 50%;
   border: 2px solid black;
 }
