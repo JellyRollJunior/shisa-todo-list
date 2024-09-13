@@ -23,15 +23,25 @@ body {
 }
 
 header {
+  --icon-size: 50px;
+
   display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+header > .user-info {
+  display: flex;
+  align-items: center;
 }
 
 .user-icon {
-  --icon-size: 50px;
+  border-radius: 50%;
+}
 
+.icon-button {
   height: var(--icon-size);
   width: var(--icon-size);
-  border-radius: 50%;
 }
 
 .content {
