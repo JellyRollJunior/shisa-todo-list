@@ -20,7 +20,7 @@ body {
 .sidebar {
   --sidebar-background-color: white;
   --sidebar-gap: 16px;
-  --icon-button-size: 32px;
+  --icon-button-size: 30px;
 
   display: flex;
   flex-direction: column;
@@ -77,8 +77,21 @@ hr {
   align-self: center;
 }
 
-.projects-title > h2 {
-  font-size: 1.2rem;
+.projects-title > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+
+.projects-title > div > img {
+  --icon-size: 36px;
+  height: var(--icon-size);
+  width: var(--icon-size);
+}
+
+.projects-title h2 {
+  font-size: 1.4rem;
 }
 
 .projects-title > button {
