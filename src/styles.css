@@ -32,7 +32,9 @@ body {
 header {
   --user-icon-size: 56px;
   --icon-button-size: 32px;
+}
 
+.sidebar-section-title {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -67,6 +69,14 @@ header > .user-info {
 hr {
   width: 96%;
   align-self: center;
+}
+
+.projects-title {
+
+}
+
+.projects-title > h2 {
+  font-size: 1.2rem;
 }
 
 .content {
