@@ -23,11 +23,13 @@ body {
 }
 
 header {
-  --icon-size: 50px;
+  --user-icon-size: 50px;
+  --icon-button-size: 32px;
 
   display: flex;
   justify-content: space-between;
   width: 100%;
+  padding: 20px 12px;
 }
 
 header > .user-info {
@@ -36,12 +38,14 @@ header > .user-info {
 }
 
 .user-icon {
+  height: var(--user-icon-size);
+  width: var(--user-icon-size);
   border-radius: 50%;
 }
 
 .icon-button {
-  height: var(--icon-size);
-  width: var(--icon-size);
+  height: var(--icon-button-size);
+  width: var(--icon-button-size);
 }
 
 .content {
