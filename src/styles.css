@@ -1,3 +1,7 @@
-* {
+*,
+*::before,
+*::after {
   background-color: white;
+  margin: 0;
+  box-sizing: border-box;
 }
