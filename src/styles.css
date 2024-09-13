@@ -1,7 +1,27 @@
 *,
 *::before,
 *::after {
-  background-color: white;
   margin: 0;
   box-sizing: border-box;
+}
+
+html {
+  background-color: white;
+  height: 100%;
+}
+
+body {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  height: 100%;
+}
+
+.sidebar {
+  height: 100%;
+
+  border: 2px solid black;
+}
+
+.content {
+  border: 2px solid black;
 }
