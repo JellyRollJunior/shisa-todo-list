@@ -18,7 +18,9 @@ body {
 }
 
 .sidebar {
+  --sidebar-background-color: white;
   --sidebar-gap: 16px;
+  --icon-button-size: 32px;
 
   display: flex;
   flex-direction: column;
@@ -31,7 +33,6 @@ body {
 
 header {
   --user-icon-size: 56px;
-  --icon-button-size: 32px;
 }
 
 .sidebar-section-title {
@@ -42,6 +43,11 @@ header {
   width: 100%;
   margin-top: calc(var(--sidebar-gap) * 1.5);
   padding: 0px 12px;
+}
+
+button {
+  background-color: var(--sidebar-background-color);
+  border: none;
 }
 
 header > .user-info {
@@ -61,7 +67,7 @@ header > .user-info {
   border-radius: 50%;
 }
 
-.icon-button {
+img.icon-button {
   height: var(--icon-button-size);
   width: var(--icon-button-size);
 }
@@ -73,6 +79,17 @@ hr {
 
 .projects-title > h2 {
   font-size: 1.2rem;
+}
+
+.projects-title > button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.projects-title > button > img {
+  border-radius: 50%;
+  border: 2px solid black;
 }
 
 .content {
