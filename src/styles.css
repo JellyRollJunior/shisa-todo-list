@@ -18,6 +18,8 @@ html {
 }
 
 body {
+  --icon-button-size: 30px;
+
   display: grid;
   grid-template-columns: 400px 1fr;
   height: 100%;
@@ -27,7 +29,6 @@ body {
   --sidebar-background-color: white;
   --sidebar-gap: 16px;
   --user-icon-size: 56px;
-  --icon-button-size: 30px;
   --title-icon-size: 36px;
 
   display: flex;
@@ -115,7 +116,8 @@ img.icon-button {
   border: 2px solid black;
 }
 
-.project-content > * {
+.project-content > *,
+.new-task-btn {
   margin: var(--content-gap) 0;
 }
 
