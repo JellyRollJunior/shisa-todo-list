@@ -13,6 +13,18 @@ const View = (function () {
         return document.querySelector(selector);
     };
 
+    const contentRoot = getElement(".project-content");
+
+    const newTaskButton = getElement("#new-task-btn");
+    const newTaskDialog = getElement("#new-task-dialog");
+    const taskTitleInput = getElement("#task-title-input");
+    const taskDescriptionTextarea = getElement("#task-description-textarea");
+    const taskDueDateInput = getElement("#due-date-input");
+    const taskPriorityInput = getElement("#priority-select");
+
+    const newProjectButton = getElement("#new-project-btn");
+    const newProjectDialog = getElement("#new-project-dialog");
+
     const renderSidebar = (projects) => {
         const projectRoot = getElement("ul.projects");
         for (const project of projects) {
@@ -42,7 +54,6 @@ const View = (function () {
         }
     };
 
-    const contentRoot = getElement(".project-content");
     const renderProjectHeader = (project) => {
         const projectTitleWrapper = createElement(
             "div",
@@ -137,16 +148,6 @@ const View = (function () {
         contentRoot.textContent = "";
     }
 
-    const newTaskDialog = getElement("#new-task-dialog");
-    const newTaskButton = getElement("#new-task-btn");
-    newTaskButton.addEventListener("click", () => {
-        newTaskDialog.showModal();
-    });
-
-    const taskTitleInput = getElement("#task-title-input");
-    const taskDescriptionTextarea = getElement("#task-description-textarea");
-    const taskDueDateInput = getElement("#due-date-input");
-    const taskPriorityInput = getElement("#priority-select");
     const resetTaskDialog = () => {
         taskTitleInput.value = "";
         taskDescriptionTextarea.value = "";
@@ -166,6 +167,14 @@ const View = (function () {
             handler(0, title, description, dueDate, priority);
         })
     }
+
+    newTaskButton.addEventListener("click", () => {
+        newTaskDialog.showModal();
+    });
+
+    newProjectButton.addEventListener("click", () => {
+        newProjectDialog.showModal();
+    })
 
     return { renderSidebar, renderContent, clearContent, bindConfirmNewTaskButton};
 })();
