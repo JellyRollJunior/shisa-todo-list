@@ -104,5 +104,12 @@ const View = (function() {
         renderTasks(project)
     }
 
+    const modal = getElement("#new-task-dialog");
+    const newTaskButton = getElement("#new-task-btn");
+    newTaskButton.addEventListener("click", (event) => {
+        const target = event.target;
+        modal.showModal();
+    })
+
     return { renderSidebar, renderContent }
 })();

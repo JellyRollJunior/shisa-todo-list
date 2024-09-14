@@ -9,63 +9,73 @@
     <div class="sidebar">
       <header class="sidebar-section-title section-margin">
         <div class="user-info center-content icon-title-gap">
-          <img src="./images/chiikawa.png" alt="chiikawa headshot" class="user-icon">
+          <img
+            src="./images/chiikawa.png"
+            alt="chiikawa headshot"
+            class="user-icon"
+          />
           <div class="username">JellyRollJunior</div>
         </div>
         <button class="center-content">
-          <img src="./images/notifications.png" alt="notification bell" class="icon-button">
+          <img
+            src="./images/notifications.png"
+            alt="notification bell"
+            class="icon-button"
+          />
         </button>
       </header>
-      <hr>
+      <hr />
       <div class="sidebar-section-title section-margin">
         <div class="sidebar-projects-title center-content icon-title-gap">
-          <img src="./images/clarify.png" alt="project icon">
+          <img src="./images/clarify.png" alt="project icon" />
           <h2>Projects</h2>
         </div>
         <button class="add-project center-content">
-          <img src="./images/add.png" alt="plus icon" class="icon-button">
+          <img src="./images/add.png" alt="plus icon" class="icon-button" />
         </button>
       </div>
       <ul class="projects"></ul>
-      <hr>
+      <hr />
     </div>
     <div class="content">
-      <div class="project-content">
-        <div class="align-center-content large-icon-title-gap">
-          <div class="project-color content-title"></div>
-          <h2>Project Title</h2>
-        </div>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam amet quo, ab quidem expedita cumque natus doloremque incidunt deleniti id odit. Quidem perferendis animi nulla consectetur repudiandae adipisci, molestias quam.</p>
-        <hr>
-        <div class="task">
-          <div class="task-content align-center-content large-icon-title-gap">
-            <input type="checkbox">
-            <h3>Task Title: Take out the garbage or something</h3>
-          </div>
-          <div class="subtasks">
-            <div class="subtask-content align-center-content large-icon-title-gap">
-              <input type="checkbox">
-              <h4>Subtask Title: Bring recycling in too</h4>
-            </div>
-          </div>
-          <div class="subtasks">
-            <div class="subtask-content align-center-content large-icon-title-gap">
-              <input type="checkbox">
-              <h4>Subtask Title: Bring compost in too even though we don't compost</h4>
-            </div>
-          </div>
-        </div>
-        <hr>
-      </div>
+      <div class="project-content"></div>
       <div class="task new-task-btn">
         <div class="task-content align-center-content large-icon-title-gap">
           <button id="new-task-btn" class="add-project center-content">
-            <img src="./images/add.png" alt="plus icon" class="icon-button">
+            <img src="./images/add.png" alt="plus icon" class="icon-button" />
           </button>
           <label for="new-task-btn">Add new task</label>
         </div>
       </div>
-      <hr>
+      <hr />
     </div>
   </body>
+  <dialog id="new-task-dialog">
+    <form>
+      <label for="task-title-input">
+        Title: 
+      </label>
+      <input id="task-title-input" type="text" />
+
+      <label for="task-description-textarea">Description: </label>
+      <textarea id="task-description-textarea"></textarea>
+      <label>
+        Duedate: 
+        <input type="text" />
+      </label>
+      <label>
+        Priority:
+        <select>
+          <option>Low</option>
+          <option value="default">Normal</option>
+          <option>High</option>
+          <option>Very high</option>
+        </select>
+      </label>
+      <div>
+        <button value="cancel" formmethod="dialog">Cancel</button>
+        <button class="confirm-btn" value="default">Confirm</button>
+      </div>
+    </form>
+  </dialog>
 </html>

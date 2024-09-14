@@ -153,3 +153,9 @@ input[type="checkbox"] {
   margin-left: var(--subtask-left-margin);
   padding: var(--subtask-padding) 0;
 }
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
