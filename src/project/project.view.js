@@ -147,7 +147,7 @@ const View = (function () {
     const taskDescriptionTextarea = getElement("#task-description-textarea");
     const taskDueDateInput = getElement("#due-date-input");
     const taskPriorityInput = getElement("#priority-select");
-    const resetDialog = () => {
+    const resetTaskDialog = () => {
         taskTitleInput.value = "";
         taskDescriptionTextarea.value = "";
         taskDueDateInput.value = "";
@@ -161,7 +161,7 @@ const View = (function () {
             const description = taskDescriptionTextarea.value;
             const dueDate = taskDueDateInput.value;
             const priority = taskPriorityInput.value;
-            resetDialog();
+            resetTaskDialog();
             newTaskDialog.close();
             handler(0, title, description, dueDate, priority);
         })
