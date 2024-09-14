@@ -68,7 +68,8 @@ function createTask(title, description, dueDate, priority) {
 
     const getSubtasks = () => subtasks;
 
-    const addSubtask = (description) => subtasks.push(description);
+    const addSubtask = (subtaskTitle) =>
+        subtasks.push(createSubtask(subtaskTitle));
     const removeSubtask = (index) => subtasks.splice(index, 1);
 
     return {
@@ -80,4 +81,8 @@ function createTask(title, description, dueDate, priority) {
         addSubtask,
         removeSubtask,
     };
+}
+
+function createSubtask(title) {
+    return { title };
 }

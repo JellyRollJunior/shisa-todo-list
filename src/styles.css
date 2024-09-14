@@ -108,6 +108,8 @@ img.icon-button {
   --content-gap: 12px;
   --task-padding: 20px;
   --checkbox-size: 22px;
+  --subtask-padding: 10px;
+  --subtask-left-margin: 45px;
 
   padding: 88px 60px;
   border: 2px solid black;
@@ -143,4 +145,9 @@ img.icon-button {
 input[type="checkbox"] {
   height: var(--checkbox-size);
   width: var(--checkbox-size);
+}
+
+.subtask-content {
+  margin-left: var(--subtask-left-margin);
+  padding: var(--subtask-padding) 0;
 }
