@@ -13,6 +13,8 @@ const View = (function() {
         return document.querySelector(selector);
     }
 
+    const contentRoot = getElement(".content");
+
     const renderProjectsSidebarSection = (projects) => {
         const projectRoot = getElement("ul.projects");
         for (const project of projects) {
@@ -35,9 +37,7 @@ const View = (function() {
     }
 
     const renderProjectHeader = (project) => {
-        const contentRoot = getElement(".content");
-        
-        const projectTitleWrapper = createElement("div", "center-content", "large-icon-title-gap");
+        const projectTitleWrapper = createElement("div", "align-center-content", "large-icon-title-gap");
         const projectColor = createElement("div", "project-color", "content-title");
         const projectTitle = createElement("h2");
         projectTitle.textContent = project.title;
@@ -50,8 +50,28 @@ const View = (function() {
         contentRoot.append(projectTitleWrapper, projectDescription, lineSeparator);
     }
 
+    const renderTasks = (project) => {
+        for (const task of project.getTasks()) {
+            const taskElement = createElement("div", "task");
+            
+            const taskContent = createElement("div", "task-content", "align-center-content", "large-icon-title-gap");
+            const checkbox = createElement("input");
+            checkbox.setAttribute("type", "checkbox");
+            const taskTitle = createElement("h3");
+            taskTitle.textContent = task.title;
+            taskContent.append(checkbox, taskTitle);
+            taskElement.append(taskContent);
+
+            // add subtask here
+            contentRoot.append(taskElement);
+            const lineSeparator = createElement("hr");
+            contentRoot.append(lineSeparator);
+        }
+    }
+
     const renderProjectContent = (project) => {
         renderProjectHeader(project);
+        renderTasks(project)
     }
 
     return { renderProjectsSidebarSection, renderProjectContent }
