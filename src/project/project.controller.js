@@ -16,6 +16,7 @@ const ProjectController = (function () {
 
     const addProject = (title, description) => {
         ProjectHolder.addProject(title, description);
+        renderContent(ProjectHolder.getProjects().length - 1);
     }
     const removeProject = (index) => {
         ProjectHolder.removeProject(index);
@@ -37,6 +38,7 @@ const ProjectController = (function () {
     };
 
     View.bindConfirmNewTaskButton(addTask);
+    View.bindConfirmNewProjectButton(addProject);
 
     return {
         addProject,
