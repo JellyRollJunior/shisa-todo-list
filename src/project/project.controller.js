@@ -6,6 +6,7 @@ export { ProjectController };
 const ProjectController = (function () {
 
     const renderSidebar = () => {
+        View.clearSidebarProjects();
         View.renderSidebar(ProjectHolder.getProjects());
     }
 
@@ -17,6 +18,7 @@ const ProjectController = (function () {
     const addProject = (title, description) => {
         ProjectHolder.addProject(title, description);
         renderContent(ProjectHolder.getProjects().length - 1);
+        renderSidebar();
     }
     const removeProject = (index) => {
         ProjectHolder.removeProject(index);

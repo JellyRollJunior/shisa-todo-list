@@ -58,6 +58,11 @@ const View = (function () {
         }
     };
 
+    const clearSidebarProjects = () => {
+        const sidebarProjects = getElement("ul.projects");
+        sidebarProjects.textContent = "";
+    }
+
     const renderProjectHeader = (project) => {
         const projectTitleWrapper = createElement(
             "div",
@@ -197,6 +202,7 @@ const View = (function () {
 
     return {
         renderSidebar,
+        clearSidebarProjects,
         renderContent,
         clearContent,
         bindConfirmNewTaskButton,
