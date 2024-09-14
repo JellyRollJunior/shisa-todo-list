@@ -115,7 +115,7 @@ img.icon-button {
   border: 2px solid black;
 }
 
-.content > * {
+.project-content > * {
   margin: var(--content-gap) 0;
 }
 

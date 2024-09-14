@@ -34,7 +34,7 @@ const View = (function() {
         }
     }
 
-    const contentRoot = getElement(".content");
+    const contentRoot = getElement(".project-content");
     const renderProjectHeader = (project) => {
         const projectTitleWrapper = createElement("div", "align-center-content", "large-icon-title-gap");
         const projectColor = createElement("div", "project-color", "content-title");
