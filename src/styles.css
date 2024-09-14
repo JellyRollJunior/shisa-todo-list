@@ -82,7 +82,7 @@ img.icon-button {
   align-self: center;
 }
 
-.projects-section-title > img {
+.sidebar-projects-title > img {
   height: var(--title-icon-size);
   width: var(--title-icon-size);
 }
@@ -123,6 +123,10 @@ img.icon-button {
 
 .content h2 {
   font-size: 2rem;
+}
+
+.large-icon-title-gap {
+  gap: 12px;
 }
 
 .content > hr {
