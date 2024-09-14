@@ -14,5 +14,4 @@ ProjectController.addSubTask(0, 0, "Subtask Title: Bring compost in too even tho
 ProjectController.addTask(0, "Task Title: Remember to call grandma", "description 1", "due date 1", "priority 1");
 
 ProjectController.renderSidebar();
-ProjectController.renderContent(0);
 console.log("test");

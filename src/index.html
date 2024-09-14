@@ -61,11 +61,11 @@
       <textarea id="task-description-textarea"></textarea>
       <label>
         Duedate: 
-        <input type="text" />
+        <input id="due-date-input" type="text" />
       </label>
       <label>
         Priority:
-        <select>
+        <select id="priority-select">
           <option>Low</option>
           <option value="default">Normal</option>
           <option>High</option>
@@ -74,7 +74,7 @@
       </label>
       <div>
         <button value="cancel" formmethod="dialog">Cancel</button>
-        <button class="confirm-btn" value="default">Confirm</button>
+        <button class="confirm" value="default">Confirm</button>
       </div>
     </form>
   </dialog>

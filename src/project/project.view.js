@@ -1,24 +1,32 @@
-import deleteIcon from "../images/delete.png"
+import deleteIcon from "../images/delete.png";
 
 export { View };
 
-const View = (function() {
+const View = (function () {
     const createElement = (tag, ...className) => {
         const element = document.createElement(tag);
         if (className) element.classList.add(...className);
         return element;
-    }
+    };
 
     const getElement = (selector) => {
         return document.querySelector(selector);
-    }
+    };
 
     const renderSidebar = (projects) => {
         const projectRoot = getElement("ul.projects");
         for (const project of projects) {
-            const projectElement = createElement("li", "project", "sidebar-section-title");
-            
-            const projectNameWrapper = createElement("div", "center-content", "icon-title-gap");
+            const projectElement = createElement(
+                "li",
+                "project",
+                "sidebar-section-title"
+            );
+
+            const projectNameWrapper = createElement(
+                "div",
+                "center-content",
+                "icon-title-gap"
+            );
             const projectColor = createElement("div", "project-color");
             const projectTitle = createElement("h3");
             projectTitle.textContent = project.title;
@@ -32,48 +40,69 @@ const View = (function() {
             projectElement.append(projectNameWrapper, deleteButton);
             projectRoot.appendChild(projectElement);
         }
-    }
+    };
 
     const contentRoot = getElement(".project-content");
     const renderProjectHeader = (project) => {
-        const projectTitleWrapper = createElement("div", "align-center-content", "large-icon-title-gap");
-        const projectColor = createElement("div", "project-color", "content-title");
+        const projectTitleWrapper = createElement(
+            "div",
+            "align-center-content",
+            "large-icon-title-gap"
+        );
+        const projectColor = createElement(
+            "div",
+            "project-color",
+            "content-title"
+        );
         const projectTitle = createElement("h2");
         projectTitle.textContent = project.title;
         projectTitleWrapper.append(projectColor, projectTitle);
 
         const projectDescription = createElement("p");
         projectDescription.textContent = project.description;
-        
+
         const lineSeparator = createElement("hr");
-        contentRoot.append(projectTitleWrapper, projectDescription, lineSeparator);
-    }
+        contentRoot.append(
+            projectTitleWrapper,
+            projectDescription,
+            lineSeparator
+        );
+    };
 
     const createBaseTask = (title) => {
-        const task = createElement("div", "align-center-content", "large-icon-title-gap");
+        const task = createElement(
+            "div",
+            "align-center-content",
+            "large-icon-title-gap"
+        );
         const checkbox = createElement("input");
         checkbox.setAttribute("type", "checkbox");
         const taskTitle = createElement("h3");
         taskTitle.textContent = title;
         task.append(checkbox, taskTitle);
         return task;
-    }
+    };
 
     const createMainTask = (title) => {
         const task = createBaseTask(title);
         task.classList.add("task-content");
         return task;
-    }
+    };
 
     const createSubtask = (title) => {
-        const subTaskElement = createElement("div", "subtask-content", "align-center-content", "large-icon-title-gap");
+        const subTaskElement = createElement(
+            "div",
+            "subtask-content",
+            "align-center-content",
+            "large-icon-title-gap"
+        );
         const checkbox = createElement("input");
         checkbox.setAttribute("type", "checkbox");
         const subtaskTitle = createElement("h4");
         subtaskTitle.textContent = title;
         subTaskElement.append(checkbox, subtaskTitle);
         return subTaskElement;
-    }
+    };
 
     const createAllSubtasks = (subtasks) => {
         const subtaskRootElement = createElement("div", "subtasks");
@@ -82,7 +111,7 @@ const View = (function() {
             subtaskRootElement.append(subtaskElement);
         }
         return subtaskRootElement;
-    }
+    };
 
     const renderTasks = (project) => {
         for (const task of project.getTasks()) {
@@ -97,19 +126,46 @@ const View = (function() {
             const lineSeparator = createElement("hr");
             contentRoot.append(lineSeparator);
         }
-    }
+    };
 
     const renderContent = (project) => {
         renderProjectHeader(project);
-        renderTasks(project)
+        renderTasks(project);
+    };
+
+    const clearContent = () => {
+        contentRoot.textContent = "";
     }
 
-    const modal = getElement("#new-task-dialog");
+    const newTaskDialog = getElement("#new-task-dialog");
     const newTaskButton = getElement("#new-task-btn");
-    newTaskButton.addEventListener("click", (event) => {
-        const target = event.target;
-        modal.showModal();
-    })
+    newTaskButton.addEventListener("click", () => {
+        newTaskDialog.showModal();
+    });
 
-    return { renderSidebar, renderContent }
+    const taskTitleInput = getElement("#task-title-input");
+    const taskDescriptionTextarea = getElement("#task-description-textarea");
+    const taskDueDateInput = getElement("#due-date-input");
+    const taskPriorityInput = getElement("#priority-select");
+    const resetDialog = () => {
+        taskTitleInput.value = "";
+        taskDescriptionTextarea.value = "";
+        taskDueDateInput.value = "";
+    }
+
+    const bindConfirmNewTaskButton = (handler) => {
+        const confirmNewTaskButton = getElement("#new-task-dialog button.confirm")
+        confirmNewTaskButton.addEventListener("click", (event) => {
+            event.preventDefault();
+            const title = taskTitleInput.value;
+            const description = taskDescriptionTextarea.value;
+            const dueDate = taskDueDateInput.value;
+            const priority = taskPriorityInput.value;
+            resetDialog();
+            newTaskDialog.close();
+            handler(0, title, description, dueDate, priority);
+        })
+    }
+
+    return { renderSidebar, renderContent, clearContent, bindConfirmNewTaskButton};
 })();

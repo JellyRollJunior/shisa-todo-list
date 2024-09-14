@@ -10,6 +10,7 @@ const ProjectController = (function () {
     }
 
     const renderContent = (index) => {
+        View.clearContent();
         View.renderContent(ProjectHolder.getProjects()[index]);
     }
 
@@ -22,6 +23,7 @@ const ProjectController = (function () {
 
     const addTask = (projectIndex, title, description, dueDate, priority) => {
         ProjectHolder.addTask(projectIndex, title, description, dueDate, priority);
+        renderContent(projectIndex);
     }
     const removeTask = (projectIndex, taskIndex) => {
         ProjectHolder.removeTask(projectIndex, taskIndex);
@@ -33,6 +35,8 @@ const ProjectController = (function () {
     const removeSubtask = (projectIndex, taskIndex, subtaskIndex) => {
         ProjectHolder.removeSubtask(projectIndex, taskIndex, subtaskIndex);
     };
+
+    View.bindConfirmNewTaskButton(addTask);
 
     return {
         addProject,
