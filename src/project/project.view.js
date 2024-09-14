@@ -13,7 +13,7 @@ const View = (function() {
         return document.querySelector(selector);
     }
 
-    const displayProjects = (projects) => {
+    const renderProjectsSidebarSection = (projects) => {
         const projectRoot = getElement("ul.projects");
         for (const project of projects) {
             const projectElement = createElement("li", "project", "sidebar-section-title");
@@ -34,5 +34,25 @@ const View = (function() {
         }
     }
 
-    return { displayProjects }
+    const renderProjectHeader = (project) => {
+        const contentRoot = getElement(".content");
+        
+        const projectTitleWrapper = createElement("div", "center-content", "large-icon-title-gap");
+        const projectColor = createElement("div", "project-color", "content-title");
+        const projectTitle = createElement("h2");
+        projectTitle.textContent = project.title;
+        projectTitleWrapper.append(projectColor, projectTitle);
+
+        const projectDescription = createElement("p");
+        projectDescription.textContent = project.description;
+        
+        const lineSeparator = createElement("hr");
+        contentRoot.append(projectTitleWrapper, projectDescription, lineSeparator);
+    }
+
+    const renderProjectContent = (project) => {
+        renderProjectHeader(project);
+    }
+
+    return { renderProjectsSidebarSection, renderProjectContent }
 })();
