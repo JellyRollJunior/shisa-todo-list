@@ -15,7 +15,7 @@ const View = (function() {
 
     const contentRoot = getElement(".content");
 
-    const renderProjectsSidebarSection = (projects) => {
+    const renderSidebar = (projects) => {
         const projectRoot = getElement("ul.projects");
         for (const project of projects) {
             const projectElement = createElement("li", "project", "sidebar-section-title");
@@ -69,10 +69,10 @@ const View = (function() {
         }
     }
 
-    const renderProjectContent = (project) => {
+    const renderContent = (project) => {
         renderProjectHeader(project);
         renderTasks(project)
     }
 
-    return { renderProjectsSidebarSection, renderProjectContent }
+    return { renderSidebar, renderContent }
 })();

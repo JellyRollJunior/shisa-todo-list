@@ -10,6 +10,8 @@ if (process.env.NODE_ENV !== 'production') {
 ProjectController.addProject("Project Title", "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam amet quo, ab quidem expedita cumque natus doloremque incidunt deleniti id odit. Quidem perferendis animi nulla consectetur repudiandae adipisci, molestias quam.");
 ProjectController.addTask(0, "Task Title: Take out the garbage or something", "description 1", "due date 1", "priority 1");
 ProjectController.addSubTask(0, 0, "Subtask 1");
-ProjectController.renderProjectsSidebarSection();
-ProjectController.renderProjectContent(0);
+ProjectController.addTask(0, "Task Title: Remember to call grandma", "description 1", "due date 1", "priority 1");
+
+ProjectController.renderSidebar();
+ProjectController.renderContent(0);
 console.log("test");

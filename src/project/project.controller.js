@@ -5,12 +5,12 @@ export { ProjectController };
 
 const ProjectController = (function () {
 
-    const renderProjectsSidebarSection = () => {
-        View.renderProjectsSidebarSection(ProjectHolder.getProjects());
+    const renderSidebar = () => {
+        View.renderSidebar(ProjectHolder.getProjects());
     }
 
-    const renderProjectContent = (index) => {
-        View.renderProjectContent(ProjectHolder.getProjects()[index]);
+    const renderContent = (index) => {
+        View.renderContent(ProjectHolder.getProjects()[index]);
     }
 
     const addProject = (title, description) => {
@@ -41,7 +41,7 @@ const ProjectController = (function () {
         removeTask,
         addSubTask,
         removeSubtask,
-        renderProjectsSidebarSection,
-        renderProjectContent,
+        renderSidebar,
+        renderContent,
     };
 })();
