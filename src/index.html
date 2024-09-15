@@ -50,6 +50,28 @@
       <hr />
     </div>
   </body>
+  <dialog id="new-project-dialog">
+    <form>
+      <label for="project-title-input"> Title: </label>
+      <input id="project-title-input" type="text" />
+
+      <label for="project-description-textarea">Description: </label>
+      <textarea id="project-description-textarea"></textarea>
+      <label>
+        Color:
+        <select id="color-select">
+          <option value="default">Yellow</option>
+          <option>Blue</option>
+          <option>Red</option>
+          <option>Orange</option>
+        </select>
+      </label>
+      <div>
+        <button value="cancel" formmethod="dialog">Cancel</button>
+        <button class="confirm" value="default">Confirm</button>
+      </div>
+    </form>
+  </dialog>
   <dialog id="new-task-dialog">
     <form>
       <label for="task-title-input"> Title: </label>
@@ -75,22 +97,10 @@
       </div>
     </form>
   </dialog>
-  <dialog id="new-project-dialog">
+  <dialog id="new-subtask-dialog">
     <form>
-      <label for="project-title-input"> Title: </label>
-      <input id="project-title-input" type="text" />
-
-      <label for="project-description-textarea">Description: </label>
-      <textarea id="project-description-textarea"></textarea>
-      <label>
-        Color:
-        <select id="color-select">
-          <option value="default">Yellow</option>
-          <option>Blue</option>
-          <option>Red</option>
-          <option>Orange</option>
-        </select>
-      </label>
+      <label for="task-title-input"> Title: </label>
+      <input id="task-title-input" type="text" />
       <div>
         <button value="cancel" formmethod="dialog">Cancel</button>
         <button class="confirm" value="default">Confirm</button>

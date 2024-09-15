@@ -16,13 +16,6 @@ const View = (function () {
 
     const contentRoot = getElement(".project-content");
 
-    const newTaskButton = getElement("#new-task-btn");
-    const newTaskDialog = getElement("#new-task-dialog");
-    const taskTitleInput = getElement("#task-title-input");
-    const taskDescriptionTextarea = getElement("#task-description-textarea");
-    const taskDueDateInput = getElement("#due-date-input");
-    const taskPriorityInput = getElement("#priority-select");
-
     const newProjectButton = getElement("#new-project-btn");
     const newProjectDialog = getElement("#new-project-dialog");
     const projectTitleInput = getElement("#project-title-input");
@@ -30,10 +23,19 @@ const View = (function () {
         "#project-description-textarea"
     );
 
+    const newTaskButton = getElement("#new-task-btn");
+    const newTaskDialog = getElement("#new-task-dialog");
+    const taskTitleInput = getElement("#task-title-input");
+    const taskDescriptionTextarea = getElement("#task-description-textarea");
+    const taskDueDateInput = getElement("#due-date-input");
+    const taskPriorityInput = getElement("#priority-select");
+
+    const newSubtaskDialog = getElement("#new-subtask-dialog");
+
     /** Create DOM elements */
-    const createMainTask = (title) => {
+    const createMainTask = (title, index) => {
         const taskRoot = createElement("div", "task-root", "task-content");
-        
+
         const task = createElement(
             "div",
             "align-center-content",
@@ -47,6 +49,8 @@ const View = (function () {
 
         const buttonHolder = createElement("div", "center-content");
         const newSubtaskButton = createElement("button", "add-project", "center-content", "new-subtask-button");
+        newSubtaskButton.setAttribute("data-index", index);
+        newSubtaskButton.addEventListener("click", handleAddSubtaskButtonClick);
         const newSubtaskButtonIcon = createElement("img", "icon-button");
         newSubtaskButtonIcon.setAttribute("alt", "Add subtask button");
         newSubtaskButtonIcon.src = plusIcon;
@@ -164,7 +168,7 @@ const View = (function () {
             taskElement.setAttribute("data-index", i);
 
             const task = tasks[i];
-            const mainTask = createMainTask(task.title);
+            const mainTask = createMainTask(task.title, i);
             taskElement.append(mainTask);
             const subTasks = createAllSubtasks(task.getSubtasks());
             taskElement.append(subTasks);
@@ -181,6 +185,22 @@ const View = (function () {
     };
 
     /** Event listeners / bind functions */
+    newTaskButton.addEventListener("click", () => {
+        newTaskDialog.showModal();
+    });
+
+    newProjectButton.addEventListener("click", () => {
+        newProjectDialog.showModal();
+    });
+
+    const handleAddSubtaskButtonClick = (event) => {
+        // add our task index to the dialog data-task-index
+        const target = event.currentTarget;
+        const taskIndex = target.dataset.index;
+        newSubtaskDialog.setAttribute("data-index", taskIndex);
+        newSubtaskDialog.showModal();
+    }
+
     const bindConfirmNewTaskButton = (handler) => {
         const confirmNewTaskButton = getElement(
             "#new-task-dialog button.confirm"
@@ -209,14 +229,6 @@ const View = (function () {
             handler(title, description);
         });
     };
-
-    newTaskButton.addEventListener("click", () => {
-        newTaskDialog.showModal();
-    });
-
-    newProjectButton.addEventListener("click", () => {
-        newProjectDialog.showModal();
-    });
 
     return {
         renderSidebar,
