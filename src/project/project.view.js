@@ -31,7 +31,9 @@ const View = (function () {
     );
 
     /** Create DOM elements */
-    const createBaseTask = (title) => {
+    const createMainTask = (title) => {
+        const taskRoot = createElement("div", "task-root", "task-content");
+        
         const task = createElement(
             "div",
             "align-center-content",
@@ -42,13 +44,17 @@ const View = (function () {
         const taskTitle = createElement("h3");
         taskTitle.textContent = title;
         task.append(checkbox, taskTitle);
-        return task;
-    };
 
-    const createMainTask = (title) => {
-        const task = createBaseTask(title);
-        task.classList.add("task-content");
-        return task;
+        const buttonHolder = createElement("div", "center-content");
+        const newSubtaskButton = createElement("button", "add-project", "center-content", "new-subtask-button");
+        const newSubtaskButtonIcon = createElement("img", "icon-button");
+        newSubtaskButtonIcon.setAttribute("alt", "Add subtask button");
+        newSubtaskButtonIcon.src = plusIcon;
+        newSubtaskButton.appendChild(newSubtaskButtonIcon);
+        buttonHolder.append(newSubtaskButton);
+        
+        taskRoot.append(task, buttonHolder);
+        return taskRoot;
     };
 
     const createSubtask = (title) => {
@@ -66,23 +72,6 @@ const View = (function () {
         return subtaskElement;
     };
 
-    const createNewSubtaskButton = () => {
-        const newSubtaskElement = createElement(
-            "div",
-            "subtask-content",
-            "align-center-content",
-            "large-icon-title-gap"
-        );
-        const newSubtaskButton = createElement("button", "add-project", "center-content", "new-subtask-btn");
-        const plusIconImg = createElement("img", "icon-button");
-        plusIconImg.src = plusIcon;
-        newSubtaskButton.appendChild(plusIconImg);
-        const subtaskTitle = createElement("h4");
-        subtaskTitle.textContent = "Add new subtask";
-        newSubtaskElement.append(newSubtaskButton, subtaskTitle);
-        return newSubtaskElement;
-    }
-
     const createAllSubtasks = (subtasks) => {
         const subtaskRootElement = createElement("div", "subtasks");
         for (let i = 0; i < subtasks.length; i++) {
@@ -91,7 +80,6 @@ const View = (function () {
             subtaskElement.setAttribute("data-index", i);
             subtaskRootElement.append(subtaskElement);
         }
-        subtaskRootElement.appendChild(createNewSubtaskButton());
         return subtaskRootElement;
     };
 

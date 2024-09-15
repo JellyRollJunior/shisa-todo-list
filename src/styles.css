@@ -159,3 +159,8 @@ form {
   flex-direction: column;
   gap: 12px;
 }
+
+.task-root {
+  display: flex;
+  justify-content: space-between;
+}
