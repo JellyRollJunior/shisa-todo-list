@@ -34,6 +34,21 @@ const View = (function () {
     const subtaskTitleInput = getElement("#subtask-title-input");
 
     /** Create DOM elements */
+    const createNewSubtaskButton = () => {
+        const newSubtaskButton = createElement(
+            "button",
+            "add-project",
+            "center-content",
+            "new-subtask-button"
+        );
+        newSubtaskButton.addEventListener("click", handleAddSubtaskButtonClick);
+        const newSubtaskButtonIcon = createElement("img", "icon-button");
+        newSubtaskButtonIcon.setAttribute("alt", "Add subtask button");
+        newSubtaskButtonIcon.src = plusIcon;
+        newSubtaskButton.appendChild(newSubtaskButtonIcon);
+        return newSubtaskButton;
+    }
+
     const createDeleteButton = () => {
         const deleteButton = createElement("button");
         const deleteButtonImg = createElement("img", "icon-button");
@@ -56,22 +71,11 @@ const View = (function () {
         taskTitle.textContent = title;
         task.append(checkbox, taskTitle);
 
-        const buttonHolder = createElement("div", "center-content");
-        const newSubtaskButton = createElement(
-            "button",
-            "add-project",
-            "center-content",
-            "new-subtask-button"
-        );
+        const newSubtaskButton = createNewSubtaskButton();
         newSubtaskButton.setAttribute("data-index", index);
-        newSubtaskButton.addEventListener("click", handleAddSubtaskButtonClick);
-        const newSubtaskButtonIcon = createElement("img", "icon-button");
-        newSubtaskButtonIcon.setAttribute("alt", "Add subtask button");
-        newSubtaskButtonIcon.src = plusIcon;
-        newSubtaskButton.appendChild(newSubtaskButtonIcon);
-        
         const deleteButton = createDeleteButton();
         deleteButton.setAttribute("data-index", index);
+        const buttonHolder = createElement("div", "center-content");
         buttonHolder.append(newSubtaskButton, deleteButton);
 
         taskRoot.append(task, buttonHolder);
