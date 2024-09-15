@@ -126,17 +126,22 @@ const View = (function () {
 
     const createAllSubtasks = (subtasks) => {
         const subtaskRootElement = createElement("div", "subtasks");
-        for (const subtask of subtasks) {
+        for (let i = 0; i < subtasks.length; i++) {
+            const subtask = subtasks[i];
             const subtaskElement = createSubtask(subtask.title);
+            subtaskElement.setAttribute("data-index", i);
             subtaskRootElement.append(subtaskElement);
         }
         return subtaskRootElement;
     };
 
     const renderTasks = (project) => {
-        for (const task of project.getTasks()) {
+        const tasks = project.getTasks();
+        for (let i = 0; i < tasks.length; i++) {
             const taskElement = createElement("div", "task");
+            taskElement.setAttribute("data-index", i);
 
+            const task = tasks[i];
             const mainTask = createMainTask(task.title);
             taskElement.append(mainTask);
             const subTasks = createAllSubtasks(task.getSubtasks());
