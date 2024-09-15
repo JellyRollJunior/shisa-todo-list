@@ -164,3 +164,7 @@ form {
   display: flex;
   justify-content: space-between;
 }
+
+dialog {
+  margin: auto;
+}
