@@ -31,6 +31,7 @@ const View = (function () {
     const taskPriorityInput = getElement("#priority-select");
 
     const newSubtaskDialog = getElement("#new-subtask-dialog");
+    const subtaskTitleInput = getElement("#subtask-title-input");
 
     /** Create DOM elements */
     const createMainTask = (title, index) => {
@@ -201,22 +202,6 @@ const View = (function () {
         newSubtaskDialog.showModal();
     }
 
-    const bindConfirmNewTaskButton = (handler) => {
-        const confirmNewTaskButton = getElement(
-            "#new-task-dialog button.confirm"
-        );
-        confirmNewTaskButton.addEventListener("click", (event) => {
-            event.preventDefault();
-            const title = taskTitleInput.value;
-            const description = taskDescriptionTextarea.value;
-            const dueDate = taskDueDateInput.value;
-            const priority = taskPriorityInput.value;
-            resetTaskDialog();
-            newTaskDialog.close();
-            handler(0, title, description, dueDate, priority);
-        });
-    };
-
     const bindConfirmNewProjectButton = (handler) => {
         const confirmNewProjectButton = getElement(
             "#new-project-dialog button.confirm"
@@ -230,6 +215,40 @@ const View = (function () {
         });
     };
 
+    const bindConfirmNewTaskButton = (handler) => {
+        const confirmNewTaskButton = getElement(
+            "#new-task-dialog button.confirm"
+        );
+        confirmNewTaskButton.addEventListener("click", (event) => {
+            event.preventDefault();
+            const title = taskTitleInput.value;
+            const description = taskDescriptionTextarea.value;
+            const dueDate = taskDueDateInput.value;
+            const priority = taskPriorityInput.value;
+            resetTaskDialog();
+            newTaskDialog.close();
+            // todo: modify project index
+            handler(0, title, description, dueDate, priority);
+        });
+    };
+
+    const bindConfirmNewSubtaskButton = (handler) => {
+        const confirmNewSubtaskButton = getElement("#new-subtask-dialog button.confirm");
+        confirmNewSubtaskButton.addEventListener("click", (event) => {
+            event.preventDefault();
+            const index = newSubtaskDialog.dataset.index;
+            const title = subtaskTitleInput.value;
+
+            console.log("task-index " + index);
+            //reset dialog
+            newSubtaskDialog.close();
+
+            // todo: modify project index
+            handler(0, index, title);
+        })
+    }
+
+
     return {
         renderSidebar,
         clearSidebarProjects,
@@ -237,5 +256,6 @@ const View = (function () {
         clearContent,
         bindConfirmNewTaskButton,
         bindConfirmNewProjectButton,
+        bindConfirmNewSubtaskButton,
     };
 })();

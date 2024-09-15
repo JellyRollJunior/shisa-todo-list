@@ -32,22 +32,24 @@ const ProjectController = (function () {
         ProjectHolder.removeTask(projectIndex, taskIndex);
     };
 
-    const addSubTask = (projectIndex, taskIndex, description) => {
-        ProjectHolder.addSubtask(projectIndex, taskIndex, description);
+    const addSubtask = (projectIndex, taskIndex, title) => {
+        ProjectHolder.addSubtask(projectIndex, taskIndex, title);
+        renderContent(projectIndex);
     };
     const removeSubtask = (projectIndex, taskIndex, subtaskIndex) => {
         ProjectHolder.removeSubtask(projectIndex, taskIndex, subtaskIndex);
     };
 
-    View.bindConfirmNewTaskButton(addTask);
     View.bindConfirmNewProjectButton(addProject);
+    View.bindConfirmNewTaskButton(addTask);
+    View.bindConfirmNewSubtaskButton(addSubtask);
 
     return {
         addProject,
         removeProject,
         addTask,
         removeTask,
-        addSubTask,
+        addSubtask,
         removeSubtask,
         renderSidebar,
         renderContent,
