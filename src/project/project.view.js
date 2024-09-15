@@ -31,12 +31,14 @@ const View = (function () {
 
     const renderSidebar = (projects) => {
         const projectRoot = getElement("ul.projects");
-        for (const project of projects) {
+        for (let i = 0; i < projects.length; i++) {
+            const project = projects[i];
             const projectElement = createElement(
                 "li",
                 "project",
                 "sidebar-section-title"
             );
+            projectElement.setAttribute("data-index", i);
 
             const projectNameWrapper = createElement(
                 "div",
