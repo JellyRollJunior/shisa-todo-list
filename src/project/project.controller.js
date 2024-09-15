@@ -4,40 +4,43 @@ import { View } from "./project.view.js";
 export { ProjectController };
 
 const ProjectController = (function () {
+    let currentProjectIndex = 0;
 
     const renderSidebar = () => {
         View.clearSidebarProjects();
         View.renderSidebar(ProjectHolder.getProjects());
     }
 
-    const renderContent = (index) => {
+    const renderContent = () => {
         View.clearContent();
-        View.renderContent(ProjectHolder.getProjects()[index]);
+        View.renderContent(ProjectHolder.getProjects()[currentProjectIndex]);
     }
 
     const addProject = (title, description) => {
         ProjectHolder.addProject(title, description);
-        renderContent(ProjectHolder.getProjects().length - 1);
+        const newProjectIndex = ProjectHolder.getProjects().length - 1;
+        currentProjectIndex = newProjectIndex;
+        renderContent();
         renderSidebar();
     }
     const removeProject = (index) => {
         ProjectHolder.removeProject(index);
     }
 
-    const addTask = (projectIndex, title, description, dueDate, priority) => {
-        ProjectHolder.addTask(projectIndex, title, description, dueDate, priority);
-        renderContent(projectIndex);
+    const addTask = (title, description, dueDate, priority) => {
+        ProjectHolder.addTask(currentProjectIndex, title, description, dueDate, priority);
+        renderContent();
     }
-    const removeTask = (projectIndex, taskIndex) => {
-        ProjectHolder.removeTask(projectIndex, taskIndex);
+    const removeTask = (taskIndex) => {
+        ProjectHolder.removeTask(currentProjectIndex, taskIndex);
     };
 
-    const addSubtask = (projectIndex, taskIndex, title) => {
-        ProjectHolder.addSubtask(projectIndex, taskIndex, title);
-        renderContent(projectIndex);
+    const addSubtask = (taskIndex, title) => {
+        ProjectHolder.addSubtask(currentProjectIndex, taskIndex, title);
+        renderContent();
     };
-    const removeSubtask = (projectIndex, taskIndex, subtaskIndex) => {
-        ProjectHolder.removeSubtask(projectIndex, taskIndex, subtaskIndex);
+    const removeSubtask = (taskIndex, subtaskIndex) => {
+        ProjectHolder.removeSubtask(currentProjectIndex, taskIndex, subtaskIndex);
     };
 
     View.bindConfirmNewProjectButton(addProject);

@@ -243,7 +243,7 @@ const View = (function () {
             resetTaskDialog();
             newTaskDialog.close();
             // todo: modify project index
-            handler(0, title, description, dueDate, priority);
+            handler(title, description, dueDate, priority);
         });
     };
 
@@ -258,7 +258,7 @@ const View = (function () {
             resetSubtaskDialog();
             newSubtaskDialog.close();
             // todo: modify project index
-            handler(0, index, title);
+            handler(index, title);
         });
     };
 
