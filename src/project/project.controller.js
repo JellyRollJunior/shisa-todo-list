@@ -9,12 +9,13 @@ const ProjectController = (function () {
     const renderSidebar = () => {
         View.clearSidebarProjects();
         View.renderSidebar(ProjectHolder.getProjects());
-        View.bindProjectElement(switchProject)
+        View.bindProjectElement(switchProject);
     }
 
     const renderContent = () => {
         View.clearContent();
         View.renderContent(ProjectHolder.getProjects()[currentProjectIndex]);
+        View.bindDeleteTaskButton(removeTask);
     }
 
     const addProject = (title, description) => {
@@ -34,6 +35,7 @@ const ProjectController = (function () {
     }
     const removeTask = (taskIndex) => {
         ProjectHolder.removeTask(currentProjectIndex, taskIndex);
+        renderContent();
     };
 
     const addSubtask = (taskIndex, title) => {

@@ -57,6 +57,12 @@ const View = (function () {
         return deleteButton;
     }
 
+    const createDeleteTaskButton = () => {
+        const deleteTaskButton = createDeleteButton();
+        deleteTaskButton.classList.add("delete-task-button");
+        return deleteTaskButton;
+    }
+
     const createMainTask = (title, index) => {
         const taskRoot = createElement("div", "task-root", "task-content");
 
@@ -73,7 +79,8 @@ const View = (function () {
 
         const newSubtaskButton = createNewSubtaskButton();
         newSubtaskButton.setAttribute("data-index", index);
-        const deleteButton = createDeleteButton();
+        
+        const deleteButton = createDeleteTaskButton();
         deleteButton.setAttribute("data-index", index);
         const buttonHolder = createElement("div", "center-content");
         buttonHolder.append(newSubtaskButton, deleteButton);
@@ -228,6 +235,17 @@ const View = (function () {
         newSubtaskDialog.showModal();
     };
 
+    const bindDeleteTaskButton = (handler) => {
+        const deleteButtons = document.querySelectorAll(".delete-task-button");
+        for (const button of deleteButtons) {
+            button.addEventListener("click", (event) => {
+                const target = event.currentTarget;
+                const index = target.dataset.index;
+                handler(index);
+            })
+        }
+    }
+
     const bindProjectElement = (handler) => {
         const projectElements = document.querySelectorAll(".project");
         for (const projectElement of projectElements) {
@@ -294,5 +312,6 @@ const View = (function () {
         bindProjectElement,
         bindConfirmNewTaskButton,
         bindConfirmNewSubtaskButton,
+        bindDeleteTaskButton,
     };
 })();
