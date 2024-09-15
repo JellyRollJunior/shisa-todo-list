@@ -1,4 +1,5 @@
 import deleteIcon from "../images/delete.png";
+import plusIcon from "../images/add.png";
 
 export { View };
 
@@ -51,7 +52,7 @@ const View = (function () {
     };
 
     const createSubtask = (title) => {
-        const subTaskElement = createElement(
+        const subtaskElement = createElement(
             "div",
             "subtask-content",
             "align-center-content",
@@ -61,9 +62,26 @@ const View = (function () {
         checkbox.setAttribute("type", "checkbox");
         const subtaskTitle = createElement("h4");
         subtaskTitle.textContent = title;
-        subTaskElement.append(checkbox, subtaskTitle);
-        return subTaskElement;
+        subtaskElement.append(checkbox, subtaskTitle);
+        return subtaskElement;
     };
+
+    const createNewSubtaskButton = () => {
+        const newSubtaskElement = createElement(
+            "div",
+            "subtask-content",
+            "align-center-content",
+            "large-icon-title-gap"
+        );
+        const newSubtaskButton = createElement("button", "add-project", "center-content", "new-subtask-btn");
+        const plusIconImg = createElement("img", "icon-button");
+        plusIconImg.src = plusIcon;
+        newSubtaskButton.appendChild(plusIconImg);
+        const subtaskTitle = createElement("h4");
+        subtaskTitle.textContent = "Add new subtask";
+        newSubtaskElement.append(newSubtaskButton, subtaskTitle);
+        return newSubtaskElement;
+    }
 
     const createAllSubtasks = (subtasks) => {
         const subtaskRootElement = createElement("div", "subtasks");
@@ -73,6 +91,7 @@ const View = (function () {
             subtaskElement.setAttribute("data-index", i);
             subtaskRootElement.append(subtaskElement);
         }
+        subtaskRootElement.appendChild(createNewSubtaskButton());
         return subtaskRootElement;
     };
 
