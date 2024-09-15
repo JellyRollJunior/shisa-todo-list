@@ -200,12 +200,12 @@ const View = (function () {
     };
 
     /** Event listeners / bind functions */
-    newTaskButton.addEventListener("click", () => {
-        newTaskDialog.showModal();
-    });
-
     newProjectButton.addEventListener("click", () => {
         newProjectDialog.showModal();
+    });
+
+    newTaskButton.addEventListener("click", () => {
+        newTaskDialog.showModal();
     });
 
     const handleAddSubtaskButtonClick = (event) => {
@@ -215,6 +215,17 @@ const View = (function () {
         newSubtaskDialog.setAttribute("data-index", taskIndex);
         newSubtaskDialog.showModal();
     };
+
+    const bindProjectElement = (handler) => {
+        const projectElements = document.querySelectorAll(".project");
+        for (const projectElement of projectElements) {
+            projectElement.addEventListener("click", (event) => {
+                const target = event.currentTarget;
+                const projectIndex = target.dataset.index;
+                handler(projectIndex);
+            })
+        }
+    }
 
     const bindConfirmNewProjectButton = (handler) => {
         const confirmNewProjectButton = getElement(
@@ -267,8 +278,9 @@ const View = (function () {
         clearSidebarProjects,
         renderContent,
         clearContent,
-        bindConfirmNewTaskButton,
         bindConfirmNewProjectButton,
+        bindProjectElement,
+        bindConfirmNewTaskButton,
         bindConfirmNewSubtaskButton,
     };
 })();
