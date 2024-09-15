@@ -93,6 +93,13 @@ const View = (function () {
         return subtaskRootElement;
     };
 
+    const createDeleteButton = () => {
+        const deleteButton = createElement("button");
+        const deleteButtonImg = createElement("img", "icon-button");
+        deleteButtonImg.src = deleteIcon;
+        deleteButton.appendChild(deleteButtonImg);
+    }
+
     /** Utilities */
     const clearSidebarProjects = () => {
         const sidebarProjects = getElement("ul.projects");
@@ -140,10 +147,7 @@ const View = (function () {
             projectTitle.textContent = project.title;
             projectNameWrapper.append(projectColor, projectTitle);
 
-            const deleteButton = createElement("button");
-            const deleteButtonImg = createElement("img", "icon-button");
-            deleteButtonImg.src = deleteIcon;
-            deleteButton.appendChild(deleteButtonImg);
+            const deleteButton = createDeleteButton();
 
             projectElement.append(projectNameWrapper, deleteButton);
             projectRoot.appendChild(projectElement);
