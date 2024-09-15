@@ -34,6 +34,14 @@ const View = (function () {
     const subtaskTitleInput = getElement("#subtask-title-input");
 
     /** Create DOM elements */
+    const createDeleteButton = () => {
+        const deleteButton = createElement("button");
+        const deleteButtonImg = createElement("img", "icon-button");
+        deleteButtonImg.src = deleteIcon;
+        deleteButton.appendChild(deleteButtonImg);
+        return deleteButton;
+    }
+
     const createMainTask = (title, index) => {
         const taskRoot = createElement("div", "task-root", "task-content");
 
@@ -61,7 +69,10 @@ const View = (function () {
         newSubtaskButtonIcon.setAttribute("alt", "Add subtask button");
         newSubtaskButtonIcon.src = plusIcon;
         newSubtaskButton.appendChild(newSubtaskButtonIcon);
-        buttonHolder.append(newSubtaskButton);
+        
+        const deleteButton = createDeleteButton();
+        deleteButton.setAttribute("data-index", index);
+        buttonHolder.append(newSubtaskButton, deleteButton);
 
         taskRoot.append(task, buttonHolder);
         return taskRoot;
@@ -92,13 +103,6 @@ const View = (function () {
         }
         return subtaskRootElement;
     };
-
-    const createDeleteButton = () => {
-        const deleteButton = createElement("button");
-        const deleteButtonImg = createElement("img", "icon-button");
-        deleteButtonImg.src = deleteIcon;
-        deleteButton.appendChild(deleteButtonImg);
-    }
 
     /** Utilities */
     const clearSidebarProjects = () => {
