@@ -49,7 +49,12 @@ const View = (function () {
         task.append(checkbox, taskTitle);
 
         const buttonHolder = createElement("div", "center-content");
-        const newSubtaskButton = createElement("button", "add-project", "center-content", "new-subtask-button");
+        const newSubtaskButton = createElement(
+            "button",
+            "add-project",
+            "center-content",
+            "new-subtask-button"
+        );
         newSubtaskButton.setAttribute("data-index", index);
         newSubtaskButton.addEventListener("click", handleAddSubtaskButtonClick);
         const newSubtaskButtonIcon = createElement("img", "icon-button");
@@ -57,7 +62,7 @@ const View = (function () {
         newSubtaskButtonIcon.src = plusIcon;
         newSubtaskButton.appendChild(newSubtaskButtonIcon);
         buttonHolder.append(newSubtaskButton);
-        
+
         taskRoot.append(task, buttonHolder);
         return taskRoot;
     };
@@ -92,16 +97,25 @@ const View = (function () {
     const clearSidebarProjects = () => {
         const sidebarProjects = getElement("ul.projects");
         sidebarProjects.textContent = "";
-    }
+    };
 
     const clearContent = () => {
         contentRoot.textContent = "";
+    };
+
+    const resetProjectDialog = () => {
+        projectTitleInput.value = "";
+        projectDescriptionTextarea.value = "";
     };
 
     const resetTaskDialog = () => {
         taskTitleInput.value = "";
         taskDescriptionTextarea.value = "";
         taskDueDateInput.value = "";
+    };
+
+    const resetSubtaskDialog = () => {
+        subtaskTitleInput.value = "";
     };
 
     /* Render DOM elements */
@@ -200,7 +214,7 @@ const View = (function () {
         const taskIndex = target.dataset.index;
         newSubtaskDialog.setAttribute("data-index", taskIndex);
         newSubtaskDialog.showModal();
-    }
+    };
 
     const bindConfirmNewProjectButton = (handler) => {
         const confirmNewProjectButton = getElement(
@@ -210,6 +224,7 @@ const View = (function () {
             event.preventDefault();
             const title = projectTitleInput.value;
             const description = projectDescriptionTextarea.value;
+            resetProjectDialog();
             newProjectDialog.close();
             handler(title, description);
         });
@@ -233,21 +248,19 @@ const View = (function () {
     };
 
     const bindConfirmNewSubtaskButton = (handler) => {
-        const confirmNewSubtaskButton = getElement("#new-subtask-dialog button.confirm");
+        const confirmNewSubtaskButton = getElement(
+            "#new-subtask-dialog button.confirm"
+        );
         confirmNewSubtaskButton.addEventListener("click", (event) => {
             event.preventDefault();
             const index = newSubtaskDialog.dataset.index;
             const title = subtaskTitleInput.value;
-
-            console.log("task-index " + index);
-            //reset dialog
+            resetSubtaskDialog();
             newSubtaskDialog.close();
-
             // todo: modify project index
             handler(0, index, title);
-        })
-    }
-
+        });
+    };
 
     return {
         renderSidebar,
