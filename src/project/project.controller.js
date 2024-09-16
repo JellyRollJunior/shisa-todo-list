@@ -14,9 +14,16 @@ const ProjectController = (function () {
     }
 
     const renderContent = () => {
+        const currentProject = ProjectHolder.getProjects()[currentProjectIndex];
         View.clearContent();
-        View.renderContent(ProjectHolder.getProjects()[currentProjectIndex]);
+        View.renderContent(currentProject);
+        View.bindTaskTitleClick(displayTask);
         View.bindDeleteTaskButton(removeTask);
+    }
+
+    const displayTask = (index) => {
+        const task = ProjectHolder.getProjects()[currentProjectIndex].getTasks()[index];
+        console.log(task);
     }
 
     const addProject = (title, description) => {

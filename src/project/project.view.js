@@ -33,6 +33,8 @@ const View = (function () {
     const newSubtaskDialog = getElement("#new-subtask-dialog");
     const subtaskTitleInput = getElement("#subtask-title-input");
 
+    const displayTaskDialog = getElement("#display-task-dialog");
+
     /** Create DOM elements */
     const createNewSubtaskButton = () => {
         const newSubtaskButton = createElement(
@@ -81,6 +83,7 @@ const View = (function () {
         checkbox.setAttribute("type", "checkbox");
         const taskTitle = createElement("h3");
         taskTitle.textContent = title;
+        taskTitle.setAttribute("data-index", index);
         task.append(checkbox, taskTitle);
 
         const newSubtaskButton = createNewSubtaskButton();
@@ -234,6 +237,18 @@ const View = (function () {
         newTaskDialog.showModal();
     });
 
+    // provide index of expanded task to controller
+    const bindTaskTitleClick = (handler) => {
+        const taskTitles = document.querySelectorAll("div.task h3");
+        for (const title of taskTitles) {
+            title.addEventListener("click", (event) => {
+                const target = event.currentTarget;
+                const index = target.dataset.index;
+                handler(index);
+            })
+        }
+    }
+
     const handleAddSubtaskButtonClick = (event) => {
         // add our task index to the dialog data-task-index
         const target = event.currentTarget;
@@ -303,7 +318,6 @@ const View = (function () {
             const priority = taskPriorityInput.value;
             resetTaskDialog();
             newTaskDialog.close();
-            // todo: modify project index
             handler(title, description, dueDate, priority);
         });
     };
@@ -318,7 +332,6 @@ const View = (function () {
             const title = subtaskTitleInput.value;
             resetSubtaskDialog();
             newSubtaskDialog.close();
-            // todo: modify project index
             handler(index, title);
         });
     };
@@ -328,6 +341,7 @@ const View = (function () {
         clearSidebarProjects,
         renderContent,
         clearContent,
+        bindTaskTitleClick,
         bindConfirmNewProjectButton,
         bindProjectTitleWrapper,
         bindConfirmNewTaskButton,
