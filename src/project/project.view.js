@@ -14,6 +14,7 @@ const View = (function () {
         return document.querySelector(selector);
     };
 
+    const projectRoot = getElement("ul.projects");
     const contentRoot = getElement(".project-content");
 
     const newProjectButton = getElement("#new-project-btn");
@@ -36,6 +37,74 @@ const View = (function () {
     const taskDialog = getElement("#task-dialog");
 
     /** Create DOM elements */
+    const createDeleteButton = () => {
+        const deleteButton = createElement("button");
+        const deleteButtonImg = createElement("img", "icon-button");
+        deleteButtonImg.src = deleteIcon;
+        deleteButton.appendChild(deleteButtonImg);
+        return deleteButton;
+    }
+
+    const createDeleteProjectButton = () => {
+        const deleteProjectButton = createDeleteButton();
+        deleteProjectButton.classList.add("delete-project-button");
+        return deleteProjectButton;
+    }
+
+    const createSidebar = (projects) => {
+        const sidebarElements = [];
+        for (let i = 0; i < projects.length; i++) {
+            const project = projects[i];
+            const projectElement = createElement(
+                "li",
+                "project",
+                "sidebar-section-title"
+            );
+
+            const projectNameWrapper = createElement(
+                "div",
+                "center-content",
+                "icon-title-gap"
+            );
+            projectNameWrapper.setAttribute("data-index", i);
+            const projectColor = createElement("div", "project-color");
+            const projectTitle = createElement("h3");
+            projectTitle.textContent = project.title;
+            projectNameWrapper.append(projectColor, projectTitle);
+
+            const deleteButton = createDeleteProjectButton();
+            deleteButton.setAttribute("data-index", i);
+
+            projectElement.append(projectNameWrapper, deleteButton);
+            sidebarElements.push(projectElement);
+        }
+        return sidebarElements;
+    };
+
+    const createProjectHeader = (project) => {
+        const headerElements = [];
+        const projectTitleWrapper = createElement(
+            "div",
+            "align-center-content",
+            "large-icon-title-gap"
+        );
+        const projectColor = createElement(
+            "div",
+            "project-color",
+            "content-title"
+        );
+        const projectTitle = createElement("h2");
+        projectTitle.textContent = project.title;
+        projectTitleWrapper.append(projectColor, projectTitle);
+
+        const projectDescription = createElement("p");
+        projectDescription.textContent = project.description;
+
+        const lineSeparator = createElement("hr");
+        headerElements.push(projectTitleWrapper, projectDescription, lineSeparator);
+        return headerElements;
+    }
+
     const createNewSubtaskButton = () => {
         const newSubtaskButton = createElement(
             "button",
@@ -49,20 +118,6 @@ const View = (function () {
         newSubtaskButtonIcon.src = plusIcon;
         newSubtaskButton.appendChild(newSubtaskButtonIcon);
         return newSubtaskButton;
-    }
-
-    const createDeleteButton = () => {
-        const deleteButton = createElement("button");
-        const deleteButtonImg = createElement("img", "icon-button");
-        deleteButtonImg.src = deleteIcon;
-        deleteButton.appendChild(deleteButtonImg);
-        return deleteButton;
-    }
-
-    const createDeleteProjectButton = () => {
-        const deleteProjectButton = createDeleteButton();
-        deleteProjectButton.classList.add("delete-project-button");
-        return deleteProjectButton;
     }
 
     const createDeleteTaskButton = () => {
@@ -124,6 +179,25 @@ const View = (function () {
         return subtaskRootElement;
     };
 
+    const createAllTasks = (project) => {
+        const tasks = project.getTasks();
+        const taskElementArray = [];
+        for (let i = 0; i < tasks.length; i++) {
+            const taskElement = createElement("div", "task");
+            taskElement.setAttribute("data-index", i);
+
+            const task = tasks[i];
+            const mainTask = createMainTask(task.title, i);
+            taskElement.append(mainTask);
+            const subTasks = createAllSubtasks(task.getSubtasks());
+            taskElement.append(subTasks);
+
+            const lineSeparator = createElement("hr");
+            taskElementArray.push(taskElement, lineSeparator);
+        }
+        return taskElementArray;
+    }
+
     /** Utilities */
     const clearSidebarProjects = () => {
         const sidebarProjects = getElement("ul.projects");
@@ -149,83 +223,21 @@ const View = (function () {
         subtaskTitleInput.value = "";
     };
 
+    const appendElements = (rootElement, elements) => {
+        for (const element of elements) {
+            rootElement.appendChild(element);
+        }
+    }
+
     /* Render DOM elements */
     const renderSidebar = (projects) => {
-        const projectRoot = getElement("ul.projects");
-        for (let i = 0; i < projects.length; i++) {
-            const project = projects[i];
-            const projectElement = createElement(
-                "li",
-                "project",
-                "sidebar-section-title"
-            );
-
-            const projectNameWrapper = createElement(
-                "div",
-                "center-content",
-                "icon-title-gap"
-            );
-            projectNameWrapper.setAttribute("data-index", i);
-            const projectColor = createElement("div", "project-color");
-            const projectTitle = createElement("h3");
-            projectTitle.textContent = project.title;
-            projectNameWrapper.append(projectColor, projectTitle);
-
-            const deleteButton = createDeleteProjectButton();
-            deleteButton.setAttribute("data-index", i);
-
-            projectElement.append(projectNameWrapper, deleteButton);
-            projectRoot.appendChild(projectElement);
-        }
-    };
-
-    const renderProjectHeader = (project) => {
-        const projectTitleWrapper = createElement(
-            "div",
-            "align-center-content",
-            "large-icon-title-gap"
-        );
-        const projectColor = createElement(
-            "div",
-            "project-color",
-            "content-title"
-        );
-        const projectTitle = createElement("h2");
-        projectTitle.textContent = project.title;
-        projectTitleWrapper.append(projectColor, projectTitle);
-
-        const projectDescription = createElement("p");
-        projectDescription.textContent = project.description;
-
-        const lineSeparator = createElement("hr");
-        contentRoot.append(
-            projectTitleWrapper,
-            projectDescription,
-            lineSeparator
-        );
-    };
-
-    const renderTasks = (project) => {
-        const tasks = project.getTasks();
-        for (let i = 0; i < tasks.length; i++) {
-            const taskElement = createElement("div", "task");
-            taskElement.setAttribute("data-index", i);
-
-            const task = tasks[i];
-            const mainTask = createMainTask(task.title, i);
-            taskElement.append(mainTask);
-            const subTasks = createAllSubtasks(task.getSubtasks());
-            taskElement.append(subTasks);
-
-            contentRoot.append(taskElement);
-            const lineSeparator = createElement("hr");
-            contentRoot.append(lineSeparator);
-        }
-    };
+        const sidebarElements = createSidebar(projects);
+        appendElements(projectRoot, sidebarElements);
+    }
 
     const renderContent = (project) => {
-        renderProjectHeader(project);
-        renderTasks(project);
+        appendElements(contentRoot, createProjectHeader(project));
+        appendElements(contentRoot, createAllTasks(project));
     };
 
     const renderTaskDialog = (task) => {
