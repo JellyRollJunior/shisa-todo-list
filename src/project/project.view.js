@@ -51,27 +51,17 @@ const View = (function () {
         const sidebarElements = [];
         for (let i = 0; i < projects.length; i++) {
             const project = projects[i];
-            const projectElement = createElement(
-                "li",
-                "project",
-                "sidebar-section-title"
-            );
+            const projectElement = createElement("li", "project");
 
-            const projectNameWrapper = createElement(
-                "div",
-                "center-content",
-                "icon-title-gap"
-            );
-            projectNameWrapper.setAttribute("data-index", i);
             const projectColor = createElement("div", "project-color");
             const projectTitle = createElement("h3");
+            projectTitle.setAttribute("data-index", i);
             projectTitle.textContent = project.title;
-            projectNameWrapper.append(projectColor, projectTitle);
 
             const deleteButton = createDeleteButton("delete-project-button");
             deleteButton.setAttribute("data-index", i);
 
-            projectElement.append(projectNameWrapper, deleteButton);
+            projectElement.append(projectColor, projectTitle, deleteButton);
             sidebarElements.push(projectElement);
         }
         return sidebarElements;
@@ -79,16 +69,8 @@ const View = (function () {
 
     const createProjectHeader = (project) => {
         const headerElements = [];
-        const projectTitleWrapper = createElement(
-            "div",
-            "align-center-content",
-            "large-icon-title-gap"
-        );
-        const projectColor = createElement(
-            "div",
-            "project-color",
-            "content-title"
-        );
+        const projectTitleWrapper = createElement("div", "project-header");
+        const projectColor = createElement("div", "project-color");
         const projectTitle = createElement("h2");
         projectTitle.textContent = project.title;
         projectTitleWrapper.append(projectColor, projectTitle);
@@ -108,7 +90,7 @@ const View = (function () {
     const createNewSubtaskButton = () => {
         const newSubtaskButton = createElement(
             "button",
-            "add-project",
+            "add-button",
             "center-content",
             "new-subtask-button"
         );
@@ -121,7 +103,7 @@ const View = (function () {
     };
 
     const createMainTask = (title, index) => {
-        const task = createElement("div", "main-task", "large-icon-title-gap");
+        const task = createElement("div", "main-task");
         const checkbox = createElement("input");
         checkbox.setAttribute("type", "checkbox");
         const taskTitle = createElement("h3");
@@ -138,11 +120,7 @@ const View = (function () {
     };
 
     const createSubtask = (title) => {
-        const subtaskElement = createElement(
-            "div",
-            "subtask",
-            "large-icon-title-gap"
-        );
+        const subtaskElement = createElement("div", "subtask");
         const checkbox = createElement("input");
         checkbox.setAttribute("type", "checkbox");
         const subtaskTitle = createElement("h4");
@@ -288,8 +266,8 @@ const View = (function () {
         }
     };
 
-    const bindProjectTitleWrapper = (handler) => {
-        const projectElements = document.querySelectorAll(".project > div");
+    const bindSidebarProjectTitle = (handler) => {
+        const projectElements = document.querySelectorAll(".project > h3");
         for (const projectElement of projectElements) {
             projectElement.addEventListener("click", (event) => {
                 const target = event.currentTarget;
@@ -351,7 +329,7 @@ const View = (function () {
         renderTaskDialog,
         bindTaskTitleClick,
         bindConfirmNewProjectButton,
-        bindProjectTitleWrapper,
+        bindSidebarProjectTitle,
         bindConfirmNewTaskButton,
         bindConfirmNewSubtaskButton,
         bindDeleteProjectButton,

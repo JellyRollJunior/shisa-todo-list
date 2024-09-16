@@ -40,21 +40,14 @@ body {
   border: 2px solid black;
 }
 
-.section-margin {
-  margin-top: calc(var(--sidebar-gap) * 1.5);
-}
-
-.sidebar-section-title {
-  display: flex;
-  justify-content: space-between;
+.sidebar-header-user {
+  display: grid;
+  grid-template-columns: var(--user-icon-size) 1fr var(--icon-button-size);
   align-items: center;
-
-  width: 100%;
-  padding: 0px 12px;
-}
-
-.icon-title-gap {
   gap: 6px;
+
+  margin-top: calc(var(--sidebar-gap) * 1.5);
+  padding: 0px 12px;
 }
 
 .user-icon {
@@ -78,21 +71,30 @@ img.icon-button {
   width: var(--icon-button-size);
 }
 
+.project {
+  display: grid;
+  grid-template-columns: var(--title-icon-size) 1fr var(--icon-button-size);
+  align-items: center;
+  gap: 6px;
+
+  padding: 0px 12px;
+}
+
 .sidebar > hr {
   width: 96%;
   align-self: center;
 }
 
-.sidebar-projects-title > img {
+.header-icon {
   height: var(--title-icon-size);
   width: var(--title-icon-size);
 }
 
-.projects-section-title > h2 {
+.sidebar h2 {
   font-size: 1.2rem;
 }
 
-.add-project > img {
+.add-button > img {
   border-radius: 50%;
   border: 2px solid black;
 }
@@ -103,6 +105,10 @@ img.icon-button {
   background-color: palegoldenrod;
   border-radius: 50%;
   border: 2px solid black;
+}
+
+.icon-title-gap {
+  gap: 6px;
 }
 
 .content {
@@ -121,27 +127,37 @@ img.icon-button {
   margin: var(--content-gap) 0;
 }
 
-.align-center-content {
+.project-header {
   display: flex;
   align-items: center;
+  gap: 12px;
 }
 
-.project-color.content-title {
+.project-header > .project-color {
   --content-project-color-icon-size: 40px;
   height: var(--content-project-color-icon-size);
   width: var(--content-project-color-icon-size);
 }
 
-.content h2 {
+.project-header > h2 {
   font-size: 2rem;
 }
 
-.large-icon-title-gap {
+.main-task {
+  display: grid;
+  grid-template-columns: var(--checkbox-size) 1fr var(--icon-button-size) var(--icon-button-size);
+  align-items: center;
   gap: 12px;
 }
 
-.task-content {
-  padding: var(--task-padding) 0;
+.subtask {
+  display: grid;
+  grid-template-columns: var(--checkbox-size) 1fr var(--icon-button-size);
+  align-items: center;
+  gap: 12px;
+
+  margin-left: var(--subtask-left-margin);
+  padding: var(--subtask-padding) 0;
 }
 
 input[type="checkbox"] {
@@ -149,24 +165,10 @@ input[type="checkbox"] {
   width: var(--checkbox-size);
 }
 
-.subtask {
-  display: grid;
-  grid-template-columns: var(--checkbox-size) 1fr var(--icon-button-size);
-  align-items: center;
-
-  margin-left: var(--subtask-left-margin);
-  padding: var(--subtask-padding) 0;
-}
-
 form {
   display: flex;
   flex-direction: column;
   gap: 12px;
-}
-
-.task-root {
-  display: flex;
-  justify-content: space-between;
 }
 
 dialog {
@@ -176,10 +178,4 @@ dialog {
 dialog#task-dialog > form {
   display: grid;
   grid-template-columns: fit-content(50px) 1fr;
-}
-
-.main-task {
-  display: grid;
-  grid-template-columns: var(--checkbox-size) 1fr var(--icon-button-size) var(--icon-button-size);
-  align-items: center;
 }

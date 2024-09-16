@@ -7,15 +7,9 @@
   </head>
   <body>
     <div class="sidebar">
-      <header class="sidebar-section-title section-margin">
-        <div class="user-info center-content icon-title-gap">
-          <img
-            src="./images/chiikawa.png"
-            alt="chiikawa headshot"
-            class="user-icon"
-          />
-          <div class="username">JellyRollJunior</div>
-        </div>
+      <header class="sidebar-header-user">
+        <img src="./images/chiikawa.png" alt="chiikawa" class="user-icon" />
+        <div class="username">JellyRollJunior</div>
         <button class="center-content">
           <img
             src="./images/notifications.png"
@@ -25,12 +19,10 @@
         </button>
       </header>
       <hr />
-      <div class="sidebar-section-title section-margin">
-        <div class="sidebar-projects-title center-content icon-title-gap">
-          <img src="./images/clarify.png" alt="project icon" />
-          <h2>Projects</h2>
-        </div>
-        <button id="new-project-btn" class="add-project center-content">
+      <div class="project">
+        <img class="header-icon" src="./images/clarify.png" alt="project icon" />
+        <h2>Projects</h2>
+        <button id="new-project-btn" class="add-button center-content">
           <img src="./images/add.png" alt="plus icon" class="icon-button" />
         </button>
       </div>
@@ -40,7 +32,7 @@
     <div class="content">
       <div class="project-content"></div>
       <div class="main-task new-task-btn large-icon-title-gap">
-        <button id="new-task-btn" class="add-project center-content">
+        <button id="new-task-btn" class="add-button center-content">
           <img src="./images/add.png" alt="plus icon" class="icon-button" />
         </button>
         <label for="new-task-btn">Add new task</label>

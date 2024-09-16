@@ -10,7 +10,7 @@ const ProjectController = (function () {
     const renderSidebar = () => {
         View.clearSidebar();
         View.renderSidebar(ProjectHolder.getProjects());
-        View.bindProjectTitleWrapper(switchProject);
+        View.bindSidebarProjectTitle(switchProject);
         View.bindDeleteProjectButton(removeProject);
     };
 
