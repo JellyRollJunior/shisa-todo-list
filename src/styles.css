@@ -168,3 +168,8 @@ form {
 dialog {
   margin: auto;
 }
+
+dialog#task-dialog > form {
+  display: grid;
+  grid-template-columns: fit-content(50px) 1fr;
+}
