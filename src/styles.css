@@ -149,7 +149,11 @@ input[type="checkbox"] {
   width: var(--checkbox-size);
 }
 
-.subtask-content {
+.subtask {
+  display: grid;
+  grid-template-columns: var(--checkbox-size) 1fr var(--icon-button-size);
+  align-items: center;
+
   margin-left: var(--subtask-left-margin);
   padding: var(--subtask-padding) 0;
 }
@@ -172,4 +176,10 @@ dialog {
 dialog#task-dialog > form {
   display: grid;
   grid-template-columns: fit-content(50px) 1fr;
+}
+
+.main-task {
+  display: grid;
+  grid-template-columns: var(--checkbox-size) 1fr var(--icon-button-size) var(--icon-button-size);
+  align-items: center;
 }

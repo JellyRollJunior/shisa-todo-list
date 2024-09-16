@@ -37,19 +37,15 @@ const View = (function () {
     const taskDialog = getElement("#task-dialog");
 
     /** Create DOM elements */
-    const createDeleteButton = () => {
-        const deleteButton = createElement("button");
+    const createDeleteButton = (buttonType) => {
+        const deleteButton = buttonType
+            ? createElement("button", buttonType)
+            : createElement("button");
         const deleteButtonImg = createElement("img", "icon-button");
         deleteButtonImg.src = deleteIcon;
         deleteButton.appendChild(deleteButtonImg);
         return deleteButton;
-    }
-
-    const createDeleteProjectButton = () => {
-        const deleteProjectButton = createDeleteButton();
-        deleteProjectButton.classList.add("delete-project-button");
-        return deleteProjectButton;
-    }
+    };
 
     const createSidebar = (projects) => {
         const sidebarElements = [];
@@ -72,7 +68,7 @@ const View = (function () {
             projectTitle.textContent = project.title;
             projectNameWrapper.append(projectColor, projectTitle);
 
-            const deleteButton = createDeleteProjectButton();
+            const deleteButton = createDeleteButton("delete-project-button");
             deleteButton.setAttribute("data-index", i);
 
             projectElement.append(projectNameWrapper, deleteButton);
@@ -101,9 +97,13 @@ const View = (function () {
         projectDescription.textContent = project.description;
 
         const lineSeparator = createElement("hr");
-        headerElements.push(projectTitleWrapper, projectDescription, lineSeparator);
+        headerElements.push(
+            projectTitleWrapper,
+            projectDescription,
+            lineSeparator
+        );
         return headerElements;
-    }
+    };
 
     const createNewSubtaskButton = () => {
         const newSubtaskButton = createElement(
@@ -118,46 +118,29 @@ const View = (function () {
         newSubtaskButtonIcon.src = plusIcon;
         newSubtaskButton.appendChild(newSubtaskButtonIcon);
         return newSubtaskButton;
-    }
-
-    const createDeleteTaskButton = () => {
-        const deleteTaskButton = createDeleteButton();
-        deleteTaskButton.classList.add("delete-task-button");
-        return deleteTaskButton;
-    }
+    };
 
     const createMainTask = (title, index) => {
-        const taskRoot = createElement("div", "task-root", "task-content");
-
-        const task = createElement(
-            "div",
-            "align-center-content",
-            "large-icon-title-gap"
-        );
+        const task = createElement("div", "main-task", "large-icon-title-gap");
         const checkbox = createElement("input");
         checkbox.setAttribute("type", "checkbox");
         const taskTitle = createElement("h3");
         taskTitle.textContent = title;
         taskTitle.setAttribute("data-index", index);
-        task.append(checkbox, taskTitle);
 
         const newSubtaskButton = createNewSubtaskButton();
         newSubtaskButton.setAttribute("data-index", index);
-        
-        const deleteButton = createDeleteTaskButton();
+        const deleteButton = createDeleteButton("delete-task-button");
         deleteButton.setAttribute("data-index", index);
-        const buttonHolder = createElement("div", "center-content");
-        buttonHolder.append(newSubtaskButton, deleteButton);
 
-        taskRoot.append(task, buttonHolder);
-        return taskRoot;
+        task.append(checkbox, taskTitle, newSubtaskButton, deleteButton);
+        return task;
     };
 
     const createSubtask = (title) => {
         const subtaskElement = createElement(
             "div",
-            "subtask-content",
-            "align-center-content",
+            "subtask",
             "large-icon-title-gap"
         );
         const checkbox = createElement("input");
@@ -196,7 +179,7 @@ const View = (function () {
             taskElementArray.push(taskElement, lineSeparator);
         }
         return taskElementArray;
-    }
+    };
 
     /** Utilities */
     const clearSidebar = () => {
@@ -227,13 +210,13 @@ const View = (function () {
         for (const element of elements) {
             rootElement.appendChild(element);
         }
-    }
+    };
 
     /* Render DOM elements */
     const renderSidebar = (projects) => {
         const sidebarElements = createSidebar(projects);
         appendElements(projectRoot, sidebarElements);
-    }
+    };
 
     const renderContent = (project) => {
         appendElements(contentRoot, createProjectHeader(project));
@@ -250,7 +233,7 @@ const View = (function () {
         duedate.textContent = task.dueDate;
         priority.textContent = task.priority;
         taskDialog.showModal();
-    }
+    };
 
     /** Event listeners / bind functions */
     newProjectButton.addEventListener("click", () => {
@@ -277,20 +260,22 @@ const View = (function () {
                 const target = event.currentTarget;
                 const index = target.dataset.index;
                 handler(index);
-            })
+            });
         }
-    }
+    };
 
     const bindDeleteProjectButton = (handler) => {
-        const deleteProjectButtons = document.querySelectorAll(".delete-project-button");
+        const deleteProjectButtons = document.querySelectorAll(
+            ".delete-project-button"
+        );
         for (const button of deleteProjectButtons) {
             button.addEventListener("click", (event) => {
                 const target = event.currentTarget;
                 const index = target.dataset.index;
                 handler(index);
-            })
+            });
         }
-    }
+    };
 
     const bindDeleteTaskButton = (handler) => {
         const deleteButtons = document.querySelectorAll(".delete-task-button");
@@ -299,9 +284,9 @@ const View = (function () {
                 const target = event.currentTarget;
                 const index = target.dataset.index;
                 handler(index);
-            })
+            });
         }
-    }
+    };
 
     const bindProjectTitleWrapper = (handler) => {
         const projectElements = document.querySelectorAll(".project > div");
@@ -310,9 +295,9 @@ const View = (function () {
                 const target = event.currentTarget;
                 const projectIndex = target.dataset.index;
                 handler(projectIndex);
-            })
+            });
         }
-    }
+    };
 
     const bindConfirmNewProjectButton = (handler) => {
         const confirmNewProjectButton = getElement(

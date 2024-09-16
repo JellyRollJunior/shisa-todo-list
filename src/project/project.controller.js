@@ -76,6 +76,7 @@ const ProjectController = (function () {
         // bind static buttons
         View.bindConfirmNewProjectButton(addProject);
         View.bindConfirmNewTaskButton(addTask);
+        View.bindConfirmNewSubtaskButton(addSubtask);
 
         // add initial welcome project if there are no projects
         if (ProjectHolder.getProjects().length == 0) {
