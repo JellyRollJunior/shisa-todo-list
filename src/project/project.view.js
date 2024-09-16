@@ -57,6 +57,12 @@ const View = (function () {
         return deleteButton;
     }
 
+    const createDeleteProjectButton = () => {
+        const deleteProjectButton = createDeleteButton();
+        deleteProjectButton.classList.add("delete-project-button");
+        return deleteProjectButton;
+    }
+
     const createDeleteTaskButton = () => {
         const deleteTaskButton = createDeleteButton();
         deleteTaskButton.classList.add("delete-task-button");
@@ -150,19 +156,20 @@ const View = (function () {
                 "project",
                 "sidebar-section-title"
             );
-            projectElement.setAttribute("data-index", i);
 
             const projectNameWrapper = createElement(
                 "div",
                 "center-content",
                 "icon-title-gap"
             );
+            projectNameWrapper.setAttribute("data-index", i);
             const projectColor = createElement("div", "project-color");
             const projectTitle = createElement("h3");
             projectTitle.textContent = project.title;
             projectNameWrapper.append(projectColor, projectTitle);
 
-            const deleteButton = createDeleteButton();
+            const deleteButton = createDeleteProjectButton();
+            deleteButton.setAttribute("data-index", i);
 
             projectElement.append(projectNameWrapper, deleteButton);
             projectRoot.appendChild(projectElement);
@@ -235,6 +242,19 @@ const View = (function () {
         newSubtaskDialog.showModal();
     };
 
+    const bindDeleteProjectButton = (handler) => {
+        const deleteProjectButtons = document.querySelectorAll(".delete-project-button");
+        for (const button of deleteProjectButtons) {
+            button.addEventListener("click", (event) => {
+                const target = event.currentTarget;
+                const index = target.dataset.index;
+
+                console.log("index: " + index);
+                handler(index);
+            })
+        }
+    }
+
     const bindDeleteTaskButton = (handler) => {
         const deleteButtons = document.querySelectorAll(".delete-task-button");
         for (const button of deleteButtons) {
@@ -246,8 +266,8 @@ const View = (function () {
         }
     }
 
-    const bindProjectElement = (handler) => {
-        const projectElements = document.querySelectorAll(".project");
+    const bindProjectTitleWrapper = (handler) => {
+        const projectElements = document.querySelectorAll(".project > div");
         for (const projectElement of projectElements) {
             projectElement.addEventListener("click", (event) => {
                 const target = event.currentTarget;
@@ -309,9 +329,10 @@ const View = (function () {
         renderContent,
         clearContent,
         bindConfirmNewProjectButton,
-        bindProjectElement,
+        bindProjectTitleWrapper,
         bindConfirmNewTaskButton,
         bindConfirmNewSubtaskButton,
+        bindDeleteProjectButton,
         bindDeleteTaskButton,
     };
 })();

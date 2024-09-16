@@ -10,6 +10,7 @@
   - 2d. completing task
   - 2e. adding subtask  
   - 2f. deleting subtask
+- 3. Work on one issue at a time. Adding many features at once leads to confusion!
 
 ## Self Improvements
 - I want the flow of data between DOM - and JS to be more elegant. Right now I am putting data attributes on everything when I believe is there probably a more elegant solution available
