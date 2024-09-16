@@ -23,6 +23,7 @@ const ProjectController = (function () {
 
     const displayTask = (index) => {
         const task = ProjectHolder.getProjects()[currentProjectIndex].getTasks()[index];
+        View.renderTaskDialog(task);
         console.log(task);
     }
 

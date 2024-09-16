@@ -33,7 +33,7 @@ const View = (function () {
     const newSubtaskDialog = getElement("#new-subtask-dialog");
     const subtaskTitleInput = getElement("#subtask-title-input");
 
-    const displayTaskDialog = getElement("#display-task-dialog");
+    const taskDialog = getElement("#task-dialog");
 
     /** Create DOM elements */
     const createNewSubtaskButton = () => {
@@ -228,6 +228,18 @@ const View = (function () {
         renderTasks(project);
     };
 
+    const renderTaskDialog = (task) => {
+        const title = getElement("#task-title");
+        const description = getElement("#task-description");
+        const duedate = getElement("#due-date");
+        const priority = getElement("#priority");
+        title.textContent = task.title;
+        description.textContent = task.description;
+        duedate.textContent = task.dueDate;
+        priority.textContent = task.priority;
+        taskDialog.showModal();
+    }
+
     /** Event listeners / bind functions */
     newProjectButton.addEventListener("click", () => {
         newProjectDialog.showModal();
@@ -236,6 +248,14 @@ const View = (function () {
     newTaskButton.addEventListener("click", () => {
         newTaskDialog.showModal();
     });
+
+    const handleAddSubtaskButtonClick = (event) => {
+        // add our task index to the dialog data-task-index
+        const target = event.currentTarget;
+        const taskIndex = target.dataset.index;
+        newSubtaskDialog.setAttribute("data-index", taskIndex);
+        newSubtaskDialog.showModal();
+    };
 
     // provide index of expanded task to controller
     const bindTaskTitleClick = (handler) => {
@@ -248,14 +268,6 @@ const View = (function () {
             })
         }
     }
-
-    const handleAddSubtaskButtonClick = (event) => {
-        // add our task index to the dialog data-task-index
-        const target = event.currentTarget;
-        const taskIndex = target.dataset.index;
-        newSubtaskDialog.setAttribute("data-index", taskIndex);
-        newSubtaskDialog.showModal();
-    };
 
     const bindDeleteProjectButton = (handler) => {
         const deleteProjectButtons = document.querySelectorAll(".delete-project-button");
@@ -341,6 +353,7 @@ const View = (function () {
         clearSidebarProjects,
         renderContent,
         clearContent,
+        renderTaskDialog,
         bindTaskTitleClick,
         bindConfirmNewProjectButton,
         bindProjectTitleWrapper,
