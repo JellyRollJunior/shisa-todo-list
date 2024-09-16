@@ -112,10 +112,6 @@ img.icon-button {
   border: 2px solid black;
 }
 
-.icon-title-gap {
-  gap: 6px;
-}
-
 .content {
   --content-gap: 12px;
   --task-padding: 20px;
