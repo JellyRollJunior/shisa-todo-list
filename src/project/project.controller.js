@@ -4,82 +4,107 @@ import { View } from "./project.view.js";
 export { ProjectController };
 
 const ProjectController = (function () {
-    let currentProjectIndex = 0;
+    let activeProject = 0;
+    const getCurrentProject = () => ProjectHolder.getProjects()[activeProject];
 
     const renderSidebar = () => {
-        View.clearSidebarProjects();
+        View.clearSidebar();
         View.renderSidebar(ProjectHolder.getProjects());
         View.bindProjectTitleWrapper(switchProject);
         View.bindDeleteProjectButton(removeProject);
-    }
+    };
 
     const renderContent = () => {
-        const currentProject = ProjectHolder.getProjects()[currentProjectIndex];
         View.clearContent();
-        View.renderContent(currentProject);
+        View.renderContent(getCurrentProject());
         View.bindTaskTitleClick(displayTask);
         View.bindDeleteTaskButton(removeTask);
-    }
+    };
 
     const displayTask = (index) => {
-        const task = ProjectHolder.getProjects()[currentProjectIndex].getTasks()[index];
+        const task = getCurrentProject().getTasks()[index];
         View.renderTaskDialog(task);
-        console.log(task);
-    }
+    };
 
     const addProject = (title, description) => {
         ProjectHolder.addProject(title, description);
-        const newProjectIndex = ProjectHolder.getProjects().length - 1;
-        currentProjectIndex = newProjectIndex;
-        renderContent();
+        activeProject = ProjectHolder.getProjects().length - 1;
         renderSidebar();
-    }
+        renderContent();
+    };
     const removeProject = (index) => {
         const length = ProjectHolder.getProjects().length;
         if (length > 1) {
-            if (currentProjectIndex == index) {
-                currentProjectIndex = (+index + 1) % length;
+            if (activeProject == index) {
+                activeProject = (+index + 1) % length;
                 renderContent();
             }
             ProjectHolder.removeProject(index);
         }
         renderSidebar();
-    }
+    };
 
     const addTask = (title, description, dueDate, priority) => {
-        ProjectHolder.addTask(currentProjectIndex, title, description, dueDate, priority);
+        ProjectHolder.addTask(
+            activeProject,
+            title,
+            description,
+            dueDate,
+            priority
+        );
         renderContent();
-    }
+    };
     const removeTask = (taskIndex) => {
-        ProjectHolder.removeTask(currentProjectIndex, taskIndex);
+        ProjectHolder.removeTask(activeProject, taskIndex);
         renderContent();
     };
 
     const addSubtask = (taskIndex, title) => {
-        ProjectHolder.addSubtask(currentProjectIndex, taskIndex, title);
+        ProjectHolder.addSubtask(activeProject, taskIndex, title);
         renderContent();
     };
     const removeSubtask = (taskIndex, subtaskIndex) => {
-        ProjectHolder.removeSubtask(currentProjectIndex, taskIndex, subtaskIndex);
+        ProjectHolder.removeSubtask(activeProject, taskIndex, subtaskIndex);
     };
 
     const switchProject = (index) => {
-        currentProjectIndex = index;
+        activeProject = index;
         renderContent();
-    }
+    };
 
-    View.bindConfirmNewProjectButton(addProject);
-    View.bindConfirmNewTaskButton(addTask);
-    View.bindConfirmNewSubtaskButton(addSubtask);
+    const start = () => {
+        // bind static buttons
+        View.bindConfirmNewProjectButton(addProject);
+        View.bindConfirmNewTaskButton(addTask);
+
+        // add initial welcome project if there are no projects
+        if (ProjectHolder.getProjects().length == 0) {
+            addProject(
+                "Welcome to Jelly List!",
+                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam amet quo, ab quidem expedita cumque natus doloremque incidunt deleniti id odit. Quidem perferendis animi nulla consectetur repudiandae adipisci, molestias quam."
+            );
+            addTask(
+                "Task Title: Take out the garbage or something",
+                "It is very stinky",
+                "tomorrow",
+                "Low"
+            );
+            addSubtask(0, "Subtask Title: Bring recycling in too");
+            addSubtask(
+                0,
+                "Subtask Title: Bring compost in too even though we don't compost"
+            );
+            addTask(
+                "Task Title: Remember to call grandma",
+                "description 1",
+                "due date 1",
+                "priority 1"
+            );
+        }
+        renderSidebar();
+    };
 
     return {
-        addProject,
-        removeProject,
-        addTask,
-        removeTask,
-        addSubtask,
-        removeSubtask,
-        renderSidebar,
-        renderContent,
+        start,
     };
 })();

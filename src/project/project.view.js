@@ -199,7 +199,7 @@ const View = (function () {
     }
 
     /** Utilities */
-    const clearSidebarProjects = () => {
+    const clearSidebar = () => {
         const sidebarProjects = getElement("ul.projects");
         sidebarProjects.textContent = "";
     };
@@ -287,8 +287,6 @@ const View = (function () {
             button.addEventListener("click", (event) => {
                 const target = event.currentTarget;
                 const index = target.dataset.index;
-
-                console.log("index: " + index);
                 handler(index);
             })
         }
@@ -362,7 +360,7 @@ const View = (function () {
 
     return {
         renderSidebar,
-        clearSidebarProjects,
+        clearSidebar,
         renderContent,
         clearContent,
         renderTaskDialog,
