@@ -62,6 +62,10 @@ body {
 }
 
 button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   background-color: var(--sidebar-background-color);
   border: none;
 }
@@ -77,6 +81,7 @@ img.icon-button {
   align-items: center;
   gap: 6px;
 
+  margin-top: 6px;
   padding: 0px 12px;
 }
 
