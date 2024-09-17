@@ -20,7 +20,11 @@
       </header>
       <hr />
       <div class="project">
-        <img class="header-icon" src="./images/clarify.png" alt="project icon" />
+        <img
+          class="header-icon"
+          src="./images/clarify.png"
+          alt="project icon"
+        />
         <h2>Projects</h2>
         <button id="new-project-btn" class="add-button center-content">
           <img src="./images/add.png" alt="plus icon" class="icon-button" />
@@ -45,22 +49,17 @@
     <form>
       <label for="project-title-input"> Title: </label>
       <input id="project-title-input" type="text" />
-
       <label for="project-description-textarea">Description: </label>
       <textarea id="project-description-textarea"></textarea>
-      <label>
-        Color:
-        <select id="color-select">
-          <option value="default">Yellow</option>
-          <option>Blue</option>
-          <option>Red</option>
-          <option>Orange</option>
-        </select>
-      </label>
-      <div>
-        <button value="cancel" formmethod="dialog">Cancel</button>
-        <button class="confirm" value="default">Confirm</button>
-      </div>
+      <label for="color-select"> Color: </label>
+      <select id="color-select">
+        <option value="default">Yellow</option>
+        <option>Blue</option>
+        <option>Red</option>
+        <option>Orange</option>
+      </select>
+      <button value="cancel" formmethod="dialog">Cancel</button>
+      <button class="confirm" value="default">Confirm</button>
     </form>
   </dialog>
   <dialog id="new-task-dialog">
@@ -70,23 +69,17 @@
       <input id="task-title-input" type="text" />
       <label for="task-description-textarea">Description: </label>
       <textarea id="task-description-textarea"></textarea>
-      <label>
-        Duedate:
-        <input id="due-date-input" type="text" />
-      </label>
-      <label>
-        Priority:
-        <select id="priority-select">
-          <option>Low</option>
-          <option value="default">Normal</option>
-          <option>High</option>
-          <option>Very high</option>
-        </select>
-      </label>
-      <div>
-        <button value="cancel" formmethod="dialog">Cancel</button>
-        <button class="confirm" value="default">Confirm</button>
-      </div>
+      <label for="due-date-input"> Duedate: </label>
+      <input id="due-date-input" type="text" />
+      <label for="priority-select"> Priority: </label>
+      <select id="priority-select">
+        <option>Low</option>
+        <option value="default">Normal</option>
+        <option>High</option>
+        <option>Very high</option>
+      </select>
+      <button value="cancel" formmethod="dialog">Cancel</button>
+      <button class="confirm" value="default">Confirm</button>
     </form>
   </dialog>
   <dialog id="new-subtask-dialog">
@@ -94,10 +87,8 @@
     <form>
       <label for="subtask-title-input"> Title: </label>
       <input id="subtask-title-input" type="text" />
-      <div>
-        <button value="cancel" formmethod="dialog">Cancel</button>
-        <button class="confirm" value="default">Confirm</button>
-      </div>
+      <button value="cancel" formmethod="dialog">Cancel</button>
+      <button class="confirm" value="default">Confirm</button>
     </form>
   </dialog>
   <dialog id="task-dialog">
@@ -111,9 +102,7 @@
       <div id="due-date"></div>
       <div>Priority:</div>
       <div id="priority"></div>
-      <div>
-        <button value="cancel" formmethod="dialog">Close</button>
-      </div>
+      <button value="cancel" formmethod="dialog">Close</button>
     </form>
   </dialog>
 </html>

@@ -166,17 +166,18 @@ input[type="checkbox"] {
   width: var(--checkbox-size);
 }
 
-form {
-  display: flex;
-  flex-direction: column;
+dialog {
+  margin: auto;
+  border-radius: 6px;
+}
+
+dialog > form {
+  display: grid;
+  grid-template-columns: fit-content(50px) 1fr;
   gap: 12px;
 }
 
-dialog {
-  margin: auto;
-}
-
-dialog#task-dialog > form {
-  display: grid;
-  grid-template-columns: fit-content(50px) 1fr;
+dialog > div {
+  margin: 8px 0 24px 0;
+  font-weight: 600;
 }
