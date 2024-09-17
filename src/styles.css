@@ -144,6 +144,10 @@ img.icon-button {
   font-size: 2rem;
 }
 
+.task {
+  margin: 16px 0;
+}
+
 .main-task {
   display: grid;
   grid-template-columns: var(--checkbox-size) 1fr var(--icon-button-size) var(--icon-button-size);
