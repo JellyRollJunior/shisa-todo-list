@@ -24,3 +24,4 @@
 - I want the flow of data between DOM - and JS to be more elegant. Right now I am putting data attributes on everything when I believe is there probably a more elegant solution available
 - I believe I could using less lines of HTML if I used grid instead of flex for my project sidebar items and task items
   - Significantly lowers the amount of generated HTML I would have to write using JS. Good lesson!
+  - EDIT: I refactored to use mostly grid. Reduces so much css, html code and looks better imo!
