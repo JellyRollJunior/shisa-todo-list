@@ -19,6 +19,7 @@ const ProjectController = (function () {
         View.renderContent(getCurrentProject());
         View.bindTaskTitleClick(displayTask);
         View.bindDeleteTaskButton(removeTask);
+        View.bindDeleteSubtaskButton(removeSubtask);
     };
 
     const displayTask = (index) => {
@@ -65,6 +66,7 @@ const ProjectController = (function () {
     };
     const removeSubtask = (taskIndex, subtaskIndex) => {
         ProjectHolder.removeSubtask(activeProject, taskIndex, subtaskIndex);
+        renderContent();
     };
 
     const switchProject = (index) => {

@@ -119,23 +119,24 @@ const View = (function () {
         return task;
     };
 
-    const createSubtask = (title, index) => {
+    const createSubtask = (title, subtaskIndex, taskIndex) => {
         const subtaskElement = createElement("div", "subtask");
         const checkbox = createElement("input");
         checkbox.setAttribute("type", "checkbox");
         const subtaskTitle = createElement("h4");
         subtaskTitle.textContent = title;
         const deleteButton = createDeleteButton("delete-subtask-button")
-        deleteButton.setAttribute("data-index", index);
+        deleteButton.setAttribute("data-subtask-index", subtaskIndex);
+        deleteButton.setAttribute("data-task-index", taskIndex);
         subtaskElement.append(checkbox, subtaskTitle, deleteButton);
         return subtaskElement;
     };
 
-    const createAllSubtasks = (subtasks) => {
+    const createAllSubtasks = (subtasks, taskIndex) => {
         const subtaskRootElement = createElement("div", "subtasks");
         for (let i = 0; i < subtasks.length; i++) {
             const subtask = subtasks[i];
-            const subtaskElement = createSubtask(subtask.title, i);
+            const subtaskElement = createSubtask(subtask.title, i, taskIndex);
             subtaskElement.setAttribute("data-index", i);
             subtaskRootElement.append(subtaskElement);
         }
@@ -152,7 +153,7 @@ const View = (function () {
             const task = tasks[i];
             const mainTask = createMainTask(task.title, i);
             taskElement.append(mainTask);
-            const subTasks = createAllSubtasks(task.getSubtasks());
+            const subTasks = createAllSubtasks(task.getSubtasks(), i);
             taskElement.append(subTasks);
 
             const lineSeparator = createElement("hr");
@@ -268,6 +269,18 @@ const View = (function () {
         }
     };
 
+    const bindDeleteSubtaskButton = (handler) => {
+        const deleteButtons = document.querySelectorAll(".delete-subtask-button");
+        for (const button of deleteButtons) {
+            button.addEventListener("click", (event) => {
+                const target = event.currentTarget;
+                const taskIndex = target.dataset.taskIndex;
+                const subtaskIndex = target.dataset.subtaskIndex;
+                handler(taskIndex, subtaskIndex);
+            });
+        }
+    }
+
     const bindSidebarProjectTitle = (handler) => {
         const projectElements = document.querySelectorAll(".project > h3");
         for (const projectElement of projectElements) {
@@ -336,5 +349,6 @@ const View = (function () {
         bindConfirmNewSubtaskButton,
         bindDeleteProjectButton,
         bindDeleteTaskButton,
+        bindDeleteSubtaskButton,
     };
 })();
