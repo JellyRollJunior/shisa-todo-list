@@ -158,7 +158,7 @@ img.icon-button {
 .subtask {
   display: grid;
   grid-template-columns: var(--checkbox-size) 1fr var(--icon-button-size);
-  align-items: center;
+  align-items: end;
   gap: 12px;
 
   margin-left: var(--subtask-left-margin);

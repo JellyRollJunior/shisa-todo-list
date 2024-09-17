@@ -119,13 +119,15 @@ const View = (function () {
         return task;
     };
 
-    const createSubtask = (title) => {
+    const createSubtask = (title, index) => {
         const subtaskElement = createElement("div", "subtask");
         const checkbox = createElement("input");
         checkbox.setAttribute("type", "checkbox");
         const subtaskTitle = createElement("h4");
         subtaskTitle.textContent = title;
-        subtaskElement.append(checkbox, subtaskTitle);
+        const deleteButton = createDeleteButton("delete-subtask-button")
+        deleteButton.setAttribute("data-index", index);
+        subtaskElement.append(checkbox, subtaskTitle, deleteButton);
         return subtaskElement;
     };
 
@@ -133,7 +135,7 @@ const View = (function () {
         const subtaskRootElement = createElement("div", "subtasks");
         for (let i = 0; i < subtasks.length; i++) {
             const subtask = subtasks[i];
-            const subtaskElement = createSubtask(subtask.title);
+            const subtaskElement = createSubtask(subtask.title, i);
             subtaskElement.setAttribute("data-index", i);
             subtaskRootElement.append(subtaskElement);
         }
