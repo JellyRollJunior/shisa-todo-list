@@ -155,7 +155,7 @@ img.icon-button {
 .task {
   background-color: var(--task-background-color);
   border-radius: 8px;
-  box-shadow: 3px 3px 5px -2px;
+  box-shadow: 3px 3px 5px -2px gray;
 
   padding: 18px 24px;
   margin: 22px 0;
