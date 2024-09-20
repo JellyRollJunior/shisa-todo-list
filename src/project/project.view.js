@@ -156,8 +156,7 @@ const View = (function () {
             const subTasks = createAllSubtasks(task.getSubtasks(), i);
             taskElement.append(subTasks);
 
-            const lineSeparator = createElement("hr");
-            taskElementArray.push(taskElement, lineSeparator);
+            taskElementArray.push(taskElement);
         }
         return taskElementArray;
     };
