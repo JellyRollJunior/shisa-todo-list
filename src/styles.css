@@ -18,9 +18,9 @@ html {
 }
 
 body {
-  --sidebar-background-color: white;
-  --content-background-color: #efeeec;
-  --task-background-color: white;
+  --sidebar-background-color: #fbf6f0;
+  --content-background-color: #ffeebe;
+  --task-background-color: #fbf6f0;
   --icon-button-size: 30px;
 
   display: grid;
@@ -76,6 +76,12 @@ img.icon-button {
   width: var(--icon-button-size);
 }
 
+.shisa {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .project {
   display: grid;
   grid-template-columns: var(--title-icon-size) 1fr var(--icon-button-size);
@@ -108,7 +114,7 @@ img.icon-button {
 .project-color {
   height: var(--icon-button-size);
   width: var(--icon-button-size);
-  background-color: palegoldenrod;
+  background-color: #F29877;
   border-radius: 50%;
   border: 2px solid black;
 }
