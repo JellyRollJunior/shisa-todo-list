@@ -83,8 +83,8 @@ const ProjectController = (function () {
         // add initial welcome project if there are no projects
         if (ProjectHolder.getProjects().length == 0) {
             addProject(
-                "Welcome to Jelly List!",
-                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam amet quo, ab quidem expedita cumque natus doloremque incidunt deleniti id odit. Quidem perferendis animi nulla consectetur repudiandae adipisci, molestias quam."
+                "Welcome to Shisa List!",
+                `Shisa from Chiikawa will stare at you intently until you complete your tasks!\n\n Make sure not to disappoint cute lil Shisa and do your todos! Just kidding, Shisa does not judge and values you even if you do not complete your tasks. She would be happy for you if you could complete them however. She would make you some ramen or give you some satapanbins or something. Real chiikawa-ers know what im sayin.`
             );
             addTask(
                 "Task Title: Take out the garbage or something",
