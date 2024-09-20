@@ -88,12 +88,7 @@ const View = (function () {
     };
 
     const createNewSubtaskButton = () => {
-        const newSubtaskButton = createElement(
-            "button",
-            "add-button",
-            "center-content",
-            "new-subtask-button"
-        );
+        const newSubtaskButton = createElement("button", "new-subtask-button");
         newSubtaskButton.addEventListener("click", handleAddSubtaskButtonClick);
         const newSubtaskButtonIcon = createElement("img", "icon-button");
         newSubtaskButtonIcon.setAttribute("alt", "Add subtask button");
@@ -125,7 +120,7 @@ const View = (function () {
         checkbox.setAttribute("type", "checkbox");
         const subtaskTitle = createElement("h4");
         subtaskTitle.textContent = title;
-        const deleteButton = createDeleteButton("delete-subtask-button")
+        const deleteButton = createDeleteButton("delete-subtask-button");
         deleteButton.setAttribute("data-subtask-index", subtaskIndex);
         deleteButton.setAttribute("data-task-index", taskIndex);
         subtaskElement.append(checkbox, subtaskTitle, deleteButton);
@@ -269,7 +264,9 @@ const View = (function () {
     };
 
     const bindDeleteSubtaskButton = (handler) => {
-        const deleteButtons = document.querySelectorAll(".delete-subtask-button");
+        const deleteButtons = document.querySelectorAll(
+            ".delete-subtask-button"
+        );
         for (const button of deleteButtons) {
             button.addEventListener("click", (event) => {
                 const target = event.currentTarget;
@@ -278,7 +275,7 @@ const View = (function () {
                 handler(taskIndex, subtaskIndex);
             });
         }
-    }
+    };
 
     const bindSidebarProjectTitle = (handler) => {
         const projectElements = document.querySelectorAll(".project > h3");
