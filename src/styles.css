@@ -18,6 +18,9 @@ html {
 }
 
 body {
+  --sidebar-background-color: ;
+  --content-background-color: ;
+  --task-background-color: ;
   --icon-button-size: 30px;
 
   display: grid;
@@ -26,7 +29,6 @@ body {
 }
 
 .sidebar {
-  --sidebar-background-color: #EEEEEE;
   --sidebar-gap: 16px;
   --user-icon-size: 56px;
   --title-icon-size: 36px;
@@ -118,6 +120,7 @@ img.icon-button {
   --subtask-padding: 10px;
   --subtask-left-margin: 45px;
 
+  background-color: var(--content-background-color);
   padding: 88px 60px;
 }
 
@@ -143,6 +146,11 @@ img.icon-button {
 }
 
 .task {
+  background-color: var(--task-background-color);
+  border-radius: 8px;
+  box-shadow: 2px 2px 2px 2px;
+
+  padding: 14px;
   margin: 16px 0;
 }
 
