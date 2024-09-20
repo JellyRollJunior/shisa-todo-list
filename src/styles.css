@@ -18,9 +18,9 @@ html {
 }
 
 body {
-  --sidebar-background-color: ;
-  --content-background-color: ;
-  --task-background-color: ;
+  --sidebar-background-color: white;
+  --content-background-color: #efeeec;
+  --task-background-color: white;
   --icon-button-size: 30px;
 
   display: grid;
@@ -148,7 +148,7 @@ img.icon-button {
 .task {
   background-color: var(--task-background-color);
   border-radius: 8px;
-  box-shadow: 2px 2px 2px 2px;
+  box-shadow: 3px 3px 5px -2px;
 
   padding: 14px;
   margin: 16px 0;
