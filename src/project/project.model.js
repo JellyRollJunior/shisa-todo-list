@@ -25,6 +25,7 @@ const ProjectHolder = (function () {
     };
 
     return {
+        projects,
         getProjects,
         addProject,
         removeProject,
@@ -53,6 +54,7 @@ function createProject(title, description) {
     };
 
     return {
+        tasks,
         title,
         description,
         getTasks,
@@ -72,6 +74,7 @@ function createTask(title, description, dueDate, priority) {
     const removeSubtask = (index) => subtasks.splice(index, 1);
 
     return {
+        subtasks,
         title,
         description,
         dueDate,

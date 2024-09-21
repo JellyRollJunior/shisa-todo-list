@@ -31,18 +31,19 @@ const ProjectController = (function () {
         ProjectHolder.addProject(title, description);
         activeProject = ProjectHolder.getProjects().length - 1;
         renderSidebar();
-        renderContent();
+        onProjectChange();
     };
+
     const removeProject = (index) => {
         const length = ProjectHolder.getProjects().length;
         if (length > 1) {
             if (activeProject == index) {
                 activeProject = (+index + 1) % length;
-                renderContent();
             }
             ProjectHolder.removeProject(index);
+            onProjectChange();
+            renderSidebar();
         }
-        renderSidebar();
     };
 
     const addTask = (title, description, dueDate, priority) => {
@@ -53,26 +54,33 @@ const ProjectController = (function () {
             dueDate,
             priority
         );
-        renderContent();
+        onProjectChange();
     };
+
     const removeTask = (taskIndex) => {
         ProjectHolder.removeTask(activeProject, taskIndex);
-        renderContent();
+        onProjectChange();
     };
 
     const addSubtask = (taskIndex, title) => {
         ProjectHolder.addSubtask(activeProject, taskIndex, title);
-        renderContent();
+        onProjectChange();
     };
+
     const removeSubtask = (taskIndex, subtaskIndex) => {
         ProjectHolder.removeSubtask(activeProject, taskIndex, subtaskIndex);
-        renderContent();
+        onProjectChange();
     };
 
     const switchProject = (index) => {
         activeProject = index;
         renderContent();
     };
+
+    const onProjectChange = () => {
+        renderContent();
+        localStorage.setItem("projects", JSON.stringify(ProjectHolder.getProjects()));
+    }
 
     const start = () => {
         // bind static buttons
