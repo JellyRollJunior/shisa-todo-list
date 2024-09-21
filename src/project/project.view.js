@@ -1,5 +1,6 @@
 import deleteIcon from "../images/delete.png";
 import plusIcon from "../images/add.png";
+import expandIcon from "../images/expand.png";
 import { format } from "date-fns";
 
 export { View };
@@ -88,6 +89,15 @@ const View = (function () {
         return headerElements;
     };
 
+    const createExpandTaskButton = () => {
+        const expandTaskButton = createElement("button", "expand-task-button");
+        expandTaskButton.setAttribute("alt", "expand task button");
+        const expandTaskButtonIcon = createElement("img", "icon-button");
+        expandTaskButtonIcon.src = expandIcon;
+        expandTaskButton.appendChild(expandTaskButtonIcon);
+        return expandTaskButton;
+    }
+
     const createNewSubtaskButton = () => {
         const newSubtaskButton = createElement("button", "new-subtask-button");
         newSubtaskButton.addEventListener("click", handleAddSubtaskButtonClick);
@@ -108,10 +118,12 @@ const View = (function () {
 
         const newSubtaskButton = createNewSubtaskButton();
         newSubtaskButton.setAttribute("data-index", index);
+        const expandTaskButton = createExpandTaskButton();
+        expandTaskButton.setAttribute("data-index", index);
         const deleteButton = createDeleteButton("delete-task-button");
         deleteButton.setAttribute("data-index", index);
 
-        task.append(checkbox, taskTitle, newSubtaskButton, deleteButton);
+        task.append(checkbox, taskTitle, newSubtaskButton, expandTaskButton, deleteButton);
         return task;
     };
 
@@ -230,10 +242,10 @@ const View = (function () {
     };
 
     // provide index of expanded task to controller
-    const bindTaskTitleClick = (handler) => {
-        const taskTitles = document.querySelectorAll("div.task h3");
-        for (const title of taskTitles) {
-            title.addEventListener("click", (event) => {
+    const bindExpandTaskButtonClick = (handler) => {
+        const expandButtons = document.querySelectorAll(".expand-task-button");
+        for (const button of expandButtons) {
+            button.addEventListener("click", (event) => {
                 const target = event.currentTarget;
                 const index = target.dataset.index;
                 handler(index);
@@ -340,7 +352,7 @@ const View = (function () {
         renderContent,
         clearContent,
         renderTaskDialog,
-        bindTaskTitleClick,
+        bindTaskTitleClick: bindExpandTaskButtonClick,
         bindConfirmNewProjectButton,
         bindSidebarProjectTitle,
         bindConfirmNewTaskButton,

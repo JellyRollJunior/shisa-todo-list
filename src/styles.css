@@ -158,7 +158,7 @@ img.icon-button {
 
 .main-task {
   display: grid;
-  grid-template-columns: var(--checkbox-size) 1fr var(--icon-button-size) var(--icon-button-size);
+  grid-template-columns: var(--checkbox-size) 1fr repeat(3, var(--icon-button-size));
   align-items: center;
   gap: 12px;
 }
