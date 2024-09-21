@@ -11,6 +11,7 @@
   - 2e. adding subtask  
   - 2f. deleting subtask
 - 3. Work on one issue at a time. Adding many features at once leads to confusion!
+- 4. Good practice: Listening to "submit" event on form instead of "click" event on submit button
 
 ## Bug Analysis
 - Issue: Delete current rendered project will crash app [Time: 1.5 hours]

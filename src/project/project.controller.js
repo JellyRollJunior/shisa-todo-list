@@ -17,7 +17,7 @@ const ProjectController = (function () {
     const renderContent = () => {
         View.clearContent();
         View.renderContent(getCurrentProject());
-        View.bindTaskTitleClick(displayTask);
+        View.bindExpandTaskButtonClick(displayTask);
         View.bindDeleteTaskButton(removeTask);
         View.bindDeleteSubtaskButton(removeSubtask);
     };

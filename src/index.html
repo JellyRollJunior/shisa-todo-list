@@ -51,9 +51,9 @@
     <div class="center-content">Add New Project</div>
     <form>
       <label for="project-title-input"> Title: </label>
-      <input id="project-title-input" type="text" />
+      <input id="project-title-input" type="text" required />
       <label for="project-description-textarea">Description: </label>
-      <textarea id="project-description-textarea"></textarea>
+      <textarea id="project-description-textarea" required></textarea>
       <label for="color-select"> Color: </label>
       <select id="color-select">
         <option value="default">Yellow</option>
@@ -61,19 +61,19 @@
         <option>Red</option>
         <option>Orange</option>
       </select>
-      <button value="cancel" formmethod="dialog">Cancel</button>
-      <button class="confirm" value="default">Confirm</button>
+      <button class="close-dialog-button">Cancel</button>
+      <button type="submit">Confirm</button>
     </form>
   </dialog>
   <dialog id="new-task-dialog">
     <div class="center-content">Add New Task</div>
     <form>
       <label for="task-title-input"> Title: </label>
-      <input id="task-title-input" type="text" />
+      <input id="task-title-input" type="text" required />
       <label for="task-description-textarea">Description: </label>
       <textarea id="task-description-textarea"></textarea>
       <label for="due-date-input"> Duedate: </label>
-      <input id="due-date-input" type="date" />
+      <input id="due-date-input" type="date" required />
       <label for="priority-select"> Priority: </label>
       <select id="priority-select">
         <option>Low</option>
@@ -81,17 +81,17 @@
         <option>High</option>
         <option>Very high</option>
       </select>
-      <button value="cancel" formmethod="dialog">Cancel</button>
-      <button class="confirm" value="default">Confirm</button>
+      <button class="close-dialog-button">Cancel</button>
+      <button type="submit">Confirm</button>
     </form>
   </dialog>
   <dialog id="new-subtask-dialog">
     <div class="center-content">Add New subask</div>
     <form>
       <label for="subtask-title-input"> Title: </label>
-      <input id="subtask-title-input" type="text" />
-      <button value="cancel" formmethod="dialog">Cancel</button>
-      <button class="confirm" value="default">Confirm</button>
+      <input id="subtask-title-input" type="text" required />
+      <button class="close-dialog-button">Cancel</button>
+      <button type="submit">Confirm</button>
     </form>
   </dialog>
   <dialog id="task-dialog">
@@ -105,7 +105,7 @@
       <div id="due-date"></div>
       <div>Priority:</div>
       <div id="priority"></div>
-      <button value="cancel" formmethod="dialog">Close</button>
+      <button class="close-dialog-button">Cancel</button>
     </form>
   </dialog>
 </html>

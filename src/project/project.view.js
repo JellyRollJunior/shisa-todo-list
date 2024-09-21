@@ -96,7 +96,7 @@ const View = (function () {
         expandTaskButtonIcon.src = expandIcon;
         expandTaskButton.appendChild(expandTaskButtonIcon);
         return expandTaskButton;
-    }
+    };
 
     const createNewSubtaskButton = () => {
         const newSubtaskButton = createElement("button", "new-subtask-button");
@@ -123,7 +123,13 @@ const View = (function () {
         const deleteButton = createDeleteButton("delete-task-button");
         deleteButton.setAttribute("data-index", index);
 
-        task.append(checkbox, taskTitle, newSubtaskButton, expandTaskButton, deleteButton);
+        task.append(
+            checkbox,
+            taskTitle,
+            newSubtaskButton,
+            expandTaskButton,
+            deleteButton
+        );
         return task;
     };
 
@@ -241,6 +247,19 @@ const View = (function () {
         newSubtaskDialog.showModal();
     };
 
+    const handleCloseDialogButtonClick = () => {
+        const closeButtons = document.querySelectorAll(".close-dialog-button");
+        for (const button of closeButtons) {
+            button.addEventListener("click", () => {
+                const dialog = button.closest("dialog");
+                if (dialog) {
+                    dialog.close();
+                }
+            });
+        }
+    };
+    handleCloseDialogButtonClick();
+
     // provide index of expanded task to controller
     const bindExpandTaskButtonClick = (handler) => {
         const expandButtons = document.querySelectorAll(".expand-task-button");
@@ -303,10 +322,8 @@ const View = (function () {
     };
 
     const bindConfirmNewProjectButton = (handler) => {
-        const confirmNewProjectButton = getElement(
-            "#new-project-dialog button.confirm"
-        );
-        confirmNewProjectButton.addEventListener("click", (event) => {
+        const confirmNewProjectButton = getElement("#new-project-dialog form");
+        confirmNewProjectButton.addEventListener("submit", (event) => {
             event.preventDefault();
             const title = projectTitleInput.value;
             const description = projectDescriptionTextarea.value;
@@ -317,10 +334,8 @@ const View = (function () {
     };
 
     const bindConfirmNewTaskButton = (handler) => {
-        const confirmNewTaskButton = getElement(
-            "#new-task-dialog button.confirm"
-        );
-        confirmNewTaskButton.addEventListener("click", (event) => {
+        const confirmNewTaskButton = getElement(`#new-task-dialog form`);
+        confirmNewTaskButton.addEventListener("submit", (event) => {
             event.preventDefault();
             const title = taskTitleInput.value;
             const description = taskDescriptionTextarea.value;
@@ -333,10 +348,8 @@ const View = (function () {
     };
 
     const bindConfirmNewSubtaskButton = (handler) => {
-        const confirmNewSubtaskButton = getElement(
-            "#new-subtask-dialog button.confirm"
-        );
-        confirmNewSubtaskButton.addEventListener("click", (event) => {
+        const confirmNewSubtaskButton = getElement("#new-subtask-dialog form");
+        confirmNewSubtaskButton.addEventListener("submit", (event) => {
             event.preventDefault();
             const index = newSubtaskDialog.dataset.index;
             const title = subtaskTitleInput.value;
@@ -352,7 +365,7 @@ const View = (function () {
         renderContent,
         clearContent,
         renderTaskDialog,
-        bindTaskTitleClick: bindExpandTaskButtonClick,
+        bindExpandTaskButtonClick,
         bindConfirmNewProjectButton,
         bindSidebarProjectTitle,
         bindConfirmNewTaskButton,
