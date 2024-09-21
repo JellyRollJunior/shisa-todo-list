@@ -1,5 +1,6 @@
 import deleteIcon from "../images/delete.png";
 import plusIcon from "../images/add.png";
+import { format } from "date-fns";
 
 export { View };
 
@@ -203,9 +204,10 @@ const View = (function () {
         const description = getElement("#task-description");
         const duedate = getElement("#due-date");
         const priority = getElement("#priority");
+
         title.textContent = task.title;
         description.textContent = task.description;
-        duedate.textContent = task.dueDate;
+        duedate.textContent = format(task.dueDate, "eeee MMMM do, uuuu");
         priority.textContent = task.priority;
         taskDialog.showModal();
     };

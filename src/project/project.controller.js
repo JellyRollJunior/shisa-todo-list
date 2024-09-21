@@ -89,7 +89,7 @@ const ProjectController = (function () {
             addTask(
                 "Task Title: Take out the garbage or something",
                 "It is very stinky",
-                "tomorrow",
+                "2024-09-10",
                 "Low"
             );
             addSubtask(0, "Subtask Title: Bring recycling in too");
@@ -100,8 +100,8 @@ const ProjectController = (function () {
             addTask(
                 "Task Title: Remember to call grandma",
                 "description 1",
-                "due date 1",
-                "priority 1"
+                "2024-09-10",
+                "High"
             );
         }
         renderSidebar();
