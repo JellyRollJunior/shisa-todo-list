@@ -12,6 +12,7 @@
   - 2f. deleting subtask
 - 3. Work on one issue at a time. Adding many features at once leads to confusion!
 - 4. Good practice: Listening to "submit" event on form instead of "click" event on submit button
+- 5. First time working with JSON during web development. Not sure about best practices for processing JSON
 
 ## Bug Analysis
 - Issue: Delete current rendered project will crash app [Time: 1.5 hours]
@@ -26,3 +27,4 @@
 - I believe I could using less lines of HTML if I used grid instead of flex for my project sidebar items and task items
   - Significantly lowers the amount of generated HTML I would have to write using JS. Good lesson!
   - EDIT: I refactored to use mostly grid. Reduces so much css, html code and looks better imo!
+- Wondering about best practices for verifying and processing JSON from local storage. I used a function that takes the JSON string and creates the objects in loop but I don't think this is efficient
